@@ -10,3 +10,11 @@ Kaggle - Predicting_Flight_Delays (2022 - US) Raw Data
     https://www.kaggle.com/datasets/omerkrbck/1-raw-data-predicting-flight-delays?select=Flights_2022_5.csv 
 
 '''
+
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+flights_1_df = pd.read_csv("Flights_2022_1.csv")
+print(flights_1_df.head())
