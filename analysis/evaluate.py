@@ -10,7 +10,7 @@ The pipeline for descriptive analytics is:
 What analytical models am I doing based on my business problem and datasets?
 
 Measures of Central Tendency: Mean, Median, Mode
-Measures of Frequency: Count, Percent, Frequency
+Measures of Frequency: Count, Frequency
 Measures of Dispersion/Variation: Variance and Standard Deviation
 '''
 
@@ -24,19 +24,17 @@ def central_ten(#dataframe, #column):
     mode = df[column].mode()
     return  
     
+
+def frequency(df, column):
+    '''
+    count, frequency
+    '''            
+
     
-                
-           
-           
-
-
-
-          
-                     
-
-
-
-
-
+def dispersion(df, column):
+    '''
+    variance and std 
+    similiar format as above but with .var and .std
+    '''
 
 
