@@ -15,24 +15,24 @@ The two datasets, "U.S. Weather Events (2016-2022)" and "Predicting_Flight_Delay
 inst414-final-project-Erin-Keane
 
 |-- data/
-|   |--- extracted.py
-|   |--- outputs.py 
-|   |--- processed.py
-|   |--- reference-tables.py
+    |   |--- extracted.py
+    |   |--- outputs.py 
+    |   |--- processed.py
+    |   |--- reference-tables.py
 
 |-- etl/
-|   |--- extract.py
-|   |--- transform.py 
-|   |--- load.py 
+    |   |--- extract.py
+    |   |--- transform.py 
+    |   |--- load.py 
 
 |-- Analysis/
-|   |--- evaluate.py 
-|   |--- model.py 
-|   |--- exploration_vis.py 
-|   |--- aggregation_descriptive_stat.py
+    |   |--- evaluate.py 
+    |   |--- model.py 
+    |   |--- exploration_vis.py 
+    |   |--- aggregation_descriptive_stat.py
 
 |-- Vis/
-|   |--- visualizations.py
+    |   |--- visualizations.py
 
 |-- .gitignore/
 |-- main.py/
