@@ -40,13 +40,13 @@ INST414 Final Project - Airport Project
 ### transform.py 
 ### load.py 
 
-## Analysis/
+## analysis/
 ### evaluate.py 
 ### model.py 
 ### exploration_vis.py 
 ### aggregation_descriptive_stat.py
 
-## Vis/ 
+## vis/ 
 ### visualizations.py
 
 ## .gitignore
