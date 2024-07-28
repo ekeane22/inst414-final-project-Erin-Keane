@@ -14,4 +14,29 @@ Measures of Frequency: Count, Percent, Frequency
 Measures of Dispersion/Variation: Variance and Standard Deviation
 '''
 
+# I would load in the dataframe from the processed.py that holds the cleaned and combined
+# dataframes. below is all rough code for later ideas. 
+
+    
+def central_ten(#dataframe, #column):
+    mean = df[column].mean()
+    median = df[column].median()
+    mode = df[column].mode()
+    return  
+    
+    
+                
+           
+           
+
+
+
+          
+                     
+
+
+
+
+
+
 

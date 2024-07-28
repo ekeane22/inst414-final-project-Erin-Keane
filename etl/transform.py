@@ -7,10 +7,10 @@ is to maintain the integrity of the data and transform it into analytical data.
 
 In this .py, I need to make edits to the csv's, one of the .csv's includes lots of rows and columns I dont need. 
 
+Returns: 
+    df: The fully combined dataframe from the weather and the flights. 
 '''
-'''
-EDA: 
-'''
+
 
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -23,7 +23,9 @@ import numpy as np
 #need to load the weather_events_df
 
 def transform(semi_combined, weather_events_df):
-    
+    '''
+    Fixes the dataframe and merges the two dataframes together to create combined. 
+    '''
 #im pretty sure I want to combine based on dates   
     combined = pd.merge(semi_combined, weather_events_df, left_on='something', right_on='something else')
     combined = combined.drop("names, axis = 1")
@@ -35,6 +37,10 @@ def transform(semi_combined, weather_events_df):
     return combined 
 
 def rename(combined, new):
+    '''
+    allows me to create new names for the columns. 
+    I will have a dictionary to do this. 
+    '''
     new = {dictionary}
     
     combined = combined.rename(columns=new)
@@ -42,6 +48,13 @@ def rename(combined, new):
 
 
 def drop(combined): 
+    '''
+    Drops any columns I dont want in my cleaned df. 
+    Args: 
+        Df: the combined dataframe of weather and flight data 
+    Returns: 
+        df: the updated combined dataframe. 
+    '''
     remove = ['columnA', 'columnB']
     combined = combined.drop(columns=remove)
     

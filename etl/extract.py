@@ -1,7 +1,7 @@
 '''
-Extract.py is designed to extract code from the data soruces. 
+Extract.py is designed to extract code from the data sources. 
 In this case I will be downloading and reading .csv files. 
-The extracted data is stored in etl /data. 
+The extracted data is stored in extracted.py. 
 
 The two different datasets/ flat files that I need to download and read: 
 Kaggle - US Weather Events (2016 - 2022) 
@@ -9,6 +9,9 @@ Kaggle - US Weather Events (2016 - 2022)
 Kaggle - Predicting_Flight_Delays (2022 - US) Raw Data
     https://www.kaggle.com/datasets/omerkrbck/1-raw-data-predicting-flight-delays?select=Flights_2022_5.csv 
 
+
+Returns: 
+    df: flight 2022 concatonated dataframe with the flight data from the 12 months. 
 '''
 
 import pandas as pd 
@@ -17,8 +20,8 @@ import seaborn as sns
 import numpy as np
 
 
-#need to figure out a more efficient way
-
+# These csv's wont load, I need to pre-clean them and redownload. 
+# they are millions of rows 
 
 flights_1_df = pd.read_csv("Flights_2022_1.csv")
 flights_1_df.head
