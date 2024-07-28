@@ -15,28 +15,28 @@ Code Package Structure
 
 inst414-final-project-Erin-Keane
 
-data
-    extracted.py
-    outputs.py 
-    processed.py
-    reference-tables.py
+-data/
+    -extracted.py
+    -outputs.py 
+    -processed.py
+    -reference-tables.py
 
-etl/
-    extract.py
-    transform.py 
-    load.py 
+-etl/
+    -extract.py
+    -transform.py 
+    -load.py 
 
-Analysis/
-    evaluate.py 
-    model.py 
-    exploration_vis.py 
-    aggregation_descriptive_stat.py
+-Analysis/
+    -evaluate.py 
+    -model.py 
+    -exploration_vis.py 
+    -aggregation_descriptive_stat.py
 
-Vis/
-    visualizations.py
+-Vis/
+    -visualizations.py
 
-.gitignore/
-main.py/
-README.md/
-requirements.txt/
+-.gitignore/
+-main.py/
+-README.md/
+-requirements.txt/
 
