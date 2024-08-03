@@ -23,41 +23,41 @@ import numpy as np
 # These csv's wont load, I need to pre-clean them and redownload. 
 # they are millions of rows 
 
-flights_1_df = pd.read_csv("Flights_2022_1.csv")
-flights_1_df.head
+FFlight1_df = pd.read_csv("FFlight_1.csv")
+FFlight1_df.head
 
-flights_2_df = pd.read_csv("Flights_2022_2.csv")
-flights_2_df.head
+FFlight2_df = pd.read_csv("FFlight_2.csv")
+FFlight2_df.head
 
-flights_3_df = pd.read_csv("Flights_2022_3.csv")
-flights_3_df.head
+FFlight3_df = pd.read_csv("FFlight_3.csv")
+FFlight3_df.head
 
-flights_4_df = pd.read_csv("Flights_2022_4.csv")
-flights_4_df.head
+FFlight4_df = pd.read_csv("FFlight_4.csv")
+FFlight4_df.head
 
-flights_5_df = pd.read_csv("Flights_2022_5.csv")
-flights_5_df.head
+FFlight5_df = pd.read_csv("FFlight_5.csv")
+FFlight5_df.head
 
-flights_6_df = pd.read_csv("Flights_2022_6.csv")
-flights_6_df.head
+FFlight6_df = pd.read_csv("FFlight_6.csv")
+FFlight6_df.head
 
-flights_7_df = pd.read_csv("Flights_2022_7.csv")
-flights_7_df.head
+FFlight7_df = pd.read_csv("FFlight_7.csv")
+FFlight7_df.head
 
-flights_8_df = pd.read_csv("Flights_2022_8.csv")
-flights_8_df.head
+FFlight8_df = pd.read_csv("FFlight_8.csv")
+FFlight8_df.head
 
-flights_9_df = pd.read_csv("Flights_2022_9.csv")
-flights_9_df.head
+FFlight9_df = pd.read_csv("FFlight_9.csv")
+FFlight9_df.head
 
-flights_10_df = pd.read_csv("Flights_2022_10.csv")
-flights_10_df.head
+FFlight10_df = pd.read_csv("FFlight_10.csv")
+FFlight10_df.head
 
-flights_11_df = pd.read_csv("Flights_2022_11.csv")
-flights_11_df.head
+FFlight11_df = pd.read_csv("FFlight_1.csv")
+FFlight11_df.head
 
-flights_12_df = pd.read_csv("Flights_2022_12.csv")
-flights_12_df.head
+FFlight12_df = pd.read_csv("FFlight_12.csv")
+FFlight12_df.head
 
 weather_events_df = pd.read_csv("WeatherEvents_Jan2016-Dec2022.csv")
 weather_events_df.head()
