@@ -72,9 +72,3 @@ def drop(combined):
 
 #save combined in new csv 
     #print combined 
-
-
-    
-
-
-
