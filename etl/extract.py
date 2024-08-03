@@ -18,6 +18,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from pathlib import Path
 
 
 '''
@@ -25,20 +26,21 @@ These .CSV viles are from Kaggle, however, they have different original sources.
 ENTER MORE INFO HERE 
 
 '''     
+data_directory = Path('../data')
 
-FFlight1_df = pd.read_csv("FFlight_1.csv")
-FFlight2_df = pd.read_csv("FFlight_2.csv")
-FFlight3_df = pd.read_csv("FFlight_3.csv")
-FFlight4_df = pd.read_csv("FFlight_4.csv")
-FFlight5_df = pd.read_csv("FFlight_5.csv")
-FFlight6_df = pd.read_csv("FFlight_6.csv")
-FFlight7_df = pd.read_csv("FFlight_7.csv")
-FFlight8_df = pd.read_csv("FFlight_8.csv")
-FFlight9_df = pd.read_csv("FFlight_9.csv")
-FFlight10_df = pd.read_csv("FFlight_10.csv")
-FFlight11_df = pd.read_csv("FFlight_11.csv")
-FFlight12_df = pd.read_csv("FFlight_12.csv")
-weather_df = pd.read_csv("WeatherEvents2022.csv")
+FFlight1_df = pd.read_csv(data_directory / "FFlight_1.csv")
+FFlight2_df = pd.read_csv(data_directory / "FFlight_2.csv")
+FFlight3_df = pd.read_csv(data_directory / "FFlight_3.csv")
+FFlight4_df = pd.read_csv(data_directory / "FFlight_4.csv")
+FFlight5_df = pd.read_csv(data_directory / "FFlight_5.csv")
+FFlight6_df = pd.read_csv(data_directory / "FFlight_6.csv")
+FFlight7_df = pd.read_csv(data_directory / "FFlight_7.csv")
+FFlight8_df = pd.read_csv(data_directory / "FFlight_8.csv")
+FFlight9_df = pd.read_csv(data_directory / "FFlight_9.csv")
+FFlight10_df = pd.read_csv(data_directory / "FFlight_10.csv")
+FFlight11_df = pd.read_csv(data_directory / "FFlight_11.csv")
+FFlight12_df = pd.read_csv(data_directory / "FFlight_12.csv")
+weather_df = pd.read_csv(data_directory / "WeatherEvents2022.csv")
 
 print(FFlight1_df.head())
 print(FFlight2_df.head())
@@ -59,6 +61,4 @@ semi_combined = pd.concat(flight_2022, ignore_index=True)
 
 print(semi_combined)
 
-semi_combined.to_csv('data/combined_flights_2022.csv', index=False)
-
-#HELP WTF WHY CANT I GET IT TO WORK 
+semi_combined.to_csv(data_directory / 'semi_combined.csv', index=False)

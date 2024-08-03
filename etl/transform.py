@@ -16,11 +16,19 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from pathlib import Path
+
 
 
 #going to load previous csv, semi_combined
 
 #need to load the weather_events_df
+
+data_directory = Path('../data')
+
+semi_combined = pd.read_csv(data_directory / "semi_combined.csv")
+
+
 
 def transform(semi_combined, weather_events_df):
     '''
@@ -28,7 +36,7 @@ def transform(semi_combined, weather_events_df):
     '''
     
 # wtf what do i merge it on or should i use join, hm not sure... to be discovered 
-#im pretty sure I want to combine based on dates   
+#im pretty sure I want to combine based on dates
     combined = pd.merge(semi_combined, weather_events_df, left_on='something', right_on='something else')
     combined = combined.drop("names, axis = 1")
     combined = combined.dropna()
@@ -72,3 +80,4 @@ def drop(combined):
 
 #save combined in new csv 
     #print combined 
+
