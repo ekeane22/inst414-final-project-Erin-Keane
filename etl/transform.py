@@ -26,6 +26,8 @@ def transform(semi_combined, weather_events_df):
     '''
     Fixes the dataframe and merges the two dataframes together to create combined. 
     '''
+    
+# wtf what do i merge it on or should i use join, hm not sure... to be discovered 
 #im pretty sure I want to combine based on dates   
     combined = pd.merge(semi_combined, weather_events_df, left_on='something', right_on='something else')
     combined = combined.drop("names, axis = 1")
@@ -37,6 +39,9 @@ def transform(semi_combined, weather_events_df):
     return combined 
 
 def rename(combined, new):
+    #wtf do i have to rename... 
+    # WAIT CONCAT THOSE TWO LOCATION COLUMNS FOR WEATHER 
+    # Ill probably join on those 
     '''
     allows me to create new names for the columns. 
     I will have a dictionary to do this. 
@@ -59,6 +64,10 @@ def drop(combined):
     combined = combined.drop(columns=remove)
     
     return combined 
+
+
+#In row cancellation code == drop A, C, and D 
+#those are not weather delays 
 
 
 #save combined in new csv 

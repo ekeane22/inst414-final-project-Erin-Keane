@@ -38,3 +38,6 @@ def dispersion(df, column):
     '''
 
 
+#wtf is going on girl 
+#go back to prev discussion post and that notes number to help yourself 
+# remember this is set up for casual analyssi but im tryign to make it descrptive or discrete idk i cant rememebr rn 
