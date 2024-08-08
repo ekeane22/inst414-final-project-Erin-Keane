@@ -1,18 +1,30 @@
 '''
-Extract.py is designed to extract code from the data sources. 
-In this case I will be downloading and reading .csv files. 
-The extracted data is stored in extracted.py. 
+Extracts multiple csv files from the "original data" folder of the data directory, reads the csv files, concatonates them,
+and saves the new concatenated csv's in the "extracted" folder of the data directory. 
 
-The two different datasets/ flat files that I need to download and read: 
-Kaggle - US Weather Events (2016 - 2022) 
-    https://www.kaggle.com/datasets/sobhanmoosavi/us-weather-events 
-Kaggle - Predicting_Flight_Delays (2022 - US) Raw Data
+The Flight csv flat files were found on Kaggle, called "Predicting_Flight_Delays(2022 - US) Raw_Data."
+This data is originates from the Department of Transportatoins Bureau of Transportation Statistics. 
+This data was likely collected by wab scraping skills before it was transformed and posted as csv files on Kaggle.
     https://www.kaggle.com/datasets/omerkrbck/1-raw-data-predicting-flight-delays?select=Flights_2022_5.csv 
 
+The Storm csv flat files are from the National Oceanic and Atmospheric Administration's (NOAA) and their National Centers for Environmental Information. 
+his dataset was collected from several different satellites, the National Weather Service, county, state, and federal emergency management, 
+local law enforcement, insurance requests, and the general public. The National Centers for Environmental Information takes this information, 
+transforms it, and releases the data in CSV format 75 days after the end of the month. 
+https://www.ncdc.noaa.gov/stormevents/choosedates.jsp?statefips=17%2CILLINOIS 
+
+Both Datasets are filtered to focus on flights and weather event data for Chicago O'Hare International Airport
 
 Returns: 
-    df: flight 2022 concatonated dataframe with the flight data from the 12 months. 
+    flight22 (df): concatenated flight data.
+    county22 (df): concatenated county weather event data. 
+
 '''
+
+
+
+
+
 
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -20,45 +32,41 @@ import seaborn as sns
 import numpy as np
 from pathlib import Path
 
+   
+data_directory = Path('../data/original data')
+extracted_directory = Path('../data/extracted')
 
-'''
-These .CSV viles are from Kaggle, however, they have different original sources. 
-ENTER MORE INFO HERE 
+flight1_df = pd.read_csv(data_directory / "Flight1.csv")
+flight2_df = pd.read_csv(data_directory / "Flight2.csv")
+flight3_df = pd.read_csv(data_directory / "Flight3.csv")
+flight4_df = pd.read_csv(data_directory / "Flight4.csv")
+flight5_df = pd.read_csv(data_directory / "Flight5.csv")
+flight6_df = pd.read_csv(data_directory / "Flight6.csv")
+flight7_df = pd.read_csv(data_directory / "Flight7.csv")
+flight8_df = pd.read_csv(data_directory / "Flight8.csv")
+flight9_df = pd.read_csv(data_directory / "Flight9.csv")
+flight10_df = pd.read_csv(data_directory / "Flight10.csv")
+flight11_df = pd.read_csv(data_directory / "Flight11.csv")
+flight12_df = pd.read_csv(data_directory / "Flight12.csv")
 
-'''     
-data_directory = Path('../data')
+lake_df = pd.read_csv(data_directory / "storm_data_lake.csv")
+kendall_df = pd.read_csv(data_directory / "storm_data_kendall.csv")
+grundy_df = pd.read_csv(data_directory / "storm_data_grundy.csv")
+will_df = pd.read_csv(data_directory / "storm_data_will.csv")
+kankakee_df = pd.read_csv(data_directory / "storm_data_kankakee.csv")
+cook_df = pd.read_csv(data_directory / "storm_data_cook.csv")
+mchenry_df = pd.read_csv(data_directory / "storm_data_mchenry.csv")
+kane_df = pd.read_csv(data_directory / "storm_data_kane.csv")
+dupage_df = pd.read_csv(data_directory / "storm_data_dupage.csv")
+dekalb_df = pd.read_csv(data_directory / "storm_data_dekalb.csv")
 
-FFlight1_df = pd.read_csv(data_directory / "FFlight_1.csv")
-FFlight2_df = pd.read_csv(data_directory / "FFlight_2.csv")
-FFlight3_df = pd.read_csv(data_directory / "FFlight_3.csv")
-FFlight4_df = pd.read_csv(data_directory / "FFlight_4.csv")
-FFlight5_df = pd.read_csv(data_directory / "FFlight_5.csv")
-FFlight6_df = pd.read_csv(data_directory / "FFlight_6.csv")
-FFlight7_df = pd.read_csv(data_directory / "FFlight_7.csv")
-FFlight8_df = pd.read_csv(data_directory / "FFlight_8.csv")
-FFlight9_df = pd.read_csv(data_directory / "FFlight_9.csv")
-FFlight10_df = pd.read_csv(data_directory / "FFlight_10.csv")
-FFlight11_df = pd.read_csv(data_directory / "FFlight_11.csv")
-FFlight12_df = pd.read_csv(data_directory / "FFlight_12.csv")
-weather_df = pd.read_csv(data_directory / "WeatherEvents2022.csv")
 
-print(FFlight1_df.head())
-print(FFlight2_df.head())
-print(FFlight3_df.head())
-print(FFlight4_df.head())
-print(FFlight5_df.head())
-print(FFlight6_df.head())
-print(FFlight7_df.head())
-print(FFlight8_df.head())
-print(FFlight9_df.head())
-print(FFlight10_df.head())
-print(FFlight11_df.head())
-print(FFlight12_df.head())
-print(weather_df.head())
+f2022 = [flight1_df, flight2_df, flight3_df, flight4_df, flight5_df, flight6_df, flight7_df, flight8_df, flight9_df, flight10_df, flight11_df, flight12_df]
+flight22 = pd.concat(f2022, ignore_index=True)
 
-flight_2022 = [FFlight1_df, FFlight2_df, FFlight3_df, FFlight4_df, FFlight5_df, FFlight6_df, FFlight7_df, FFlight8_df, FFlight9_df, FFlight10_df, FFlight11_df, FFlight12_df]
-semi_combined = pd.concat(flight_2022, ignore_index=True)
 
-print(semi_combined)
+county = [lake_df, kendall_df, grundy_df, will_df, kankakee_df, cook_df, mchenry_df, kane_df, dupage_df, dekalb_df]
+county22 = pd.concat(county, ignore_index=True)
 
-semi_combined.to_csv(data_directory / 'semi_combined.csv', index=False)
+flight22.to_csv(extracted_directory / 'flight22.csv', index=False)
+county22.to_csv(extracted_directory / 'county22.csv', index=False)

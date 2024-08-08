@@ -23,5 +23,5 @@ print(data2.head())
 #Predicting Flight Delays 	
 #Attribute	Reference 
 #Cancelled Flight 	1 = Yes 
-#Diverted Flight 	1 = Yes 
+ 
 

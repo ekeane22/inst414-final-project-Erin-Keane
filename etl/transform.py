@@ -19,12 +19,10 @@ import numpy as np
 from pathlib import Path
 
 
+extracted_directory = Path('../data/extracted')
+transformed_directory = Path('../data/transformed')
 
-#going to load previous csv, semi_combined
 
-#need to load the weather_events_df
-
-data_directory = Path('../data')
 
 semi_combined = pd.read_csv(data_directory / "semi_combined.csv")
 

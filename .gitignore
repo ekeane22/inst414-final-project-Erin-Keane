@@ -1,36 +1,32 @@
-WeatherEvents_Jan2016-Dec2022.csv
-WeatherEvents_Jan2016-Dec2022.csv.zip
+
 .DS_store
-Flights_2022_1.csv 
-Flights_2022_2.csv
-Flights_2022_3.csv
-Flights_2022_4.csv
-Flights_2022_5.csv
-Flights_2022_6.csv
-Flights_2022_7.csv
-Flights_2022_8.csv
-Flights_2022_9.csv
-Flights_2022_10.csv
-Flights_2022_11.csv
-Flights_2022_12.csv
+Flight1.csv 
+Flight2.csv
+Flight3.csv
+Flight4.csv
+Flight5.csv
+Flight6.csv
+Flight7.csv
+Flight8.csv
+Flight9.csv
+Flight10.csv
+Flight11.csv
+Flight12.csv
 
-semi_combined.csv
 
-FFlight_1.csv
-FFlight_2.csv
-FFlight_3.csv
-FFlight_4.csv
-FFlight_5.csv
-FFlight_6.csv
-FFlight_7.csv
-FFlight_8.csv
-FFlight_9.csv
-FFlight_10.csv
-FFlight_11.csv
-FFlight_12.csv
-CWeatherEvents_Jan2016-Dec2022.csv 
-WeatherEvents_Jan2016-Dec2022 2.csv
 Data Dictionary_US Weather Events (2016 - 2022).csv
 Data Dictionary_Predicting Flight Delays 2022.csv
 
-WeatherEvents2022.csv
+storm_data_lake.csv 
+storm_data_kendall.csv
+storm_data_grundy.csv
+storm_data_will.csv
+storm_data_kankakee.csv
+storm_data_cook.csv
+storm_data_mchenry.csv
+storm_data_kane.csv
+storm_data_dupage.csv
+storm_data_dekalb.csv
+
+county22.csv 
+flight22.csv
