@@ -14,4 +14,9 @@ import plotly
 import bokeh 
 
 
-#BETTER FIGURE SOMETHING OUT 
+'''
+what type of regression model do i want to do? 
+
+
+
+'''
