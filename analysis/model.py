@@ -46,7 +46,3 @@ def preprocess(wf):
 #NASdelay 
 #security delay 
 #late aircraft delay 
-
-
-
-

@@ -18,5 +18,5 @@ evaluation metrics for regressin???
 '''
 
 
-transformed_directory = Path('../data/transformed')
-extracted_directory = Path('../data/extracted')
+#transformed_directory = Path('../data/transformed')
+#Extracted_directory = Path('../data/extracted')
