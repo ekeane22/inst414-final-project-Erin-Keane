@@ -14,7 +14,6 @@ Flight11.csv
 Flight12.csv
 
 
-Data Dictionary_US Weather Events (2016 - 2022).csv
 Data Dictionary_Predicting Flight Delays 2022.csv
 
 storm_data_lake.csv 
@@ -30,6 +29,13 @@ storm_data_dekalb.csv
 
 county22.csv 
 flight22.csv
-wf.csv 
 
+<<<<<<< HEAD
 Data Dictionary_Weather Events Data.csv
+=======
+wf.csv 
+wf.csv
+
+Data Dictionary_Weather Events Data.csv 
+Data Dictonary_Weather Events Data.csv
+>>>>>>> origin/main

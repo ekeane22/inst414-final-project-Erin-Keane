@@ -17,7 +17,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from pathlib import Path
+import logging 
+import mylib 
 
+#logger = logging.getLogger(__name__)
+#logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
 
 extracted_directory = Path('../data/extracted')
 transformed_directory = Path('../data/transformed')
@@ -32,6 +36,7 @@ def load_from_extracted(extracted_directory):
     Returns: 
         tuple: Contains the county22 and flight22 DataFrames. 
     '''
+    
     county22 = pd.read_csv(extracted_directory / 'county22.csv')
     flight22 = pd.read_csv(extracted_directory / 'flight22.csv')
     return county22, flight22

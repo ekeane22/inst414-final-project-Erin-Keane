@@ -2,7 +2,7 @@
 INST414 Final Project - Airport Project 
 
 # Project Overview 
-#### My business problem involves understanding how weather and seasonal conditions correlate with flight delays and cancellation rates at different U.S. airports.The two datasets, "U.S. Weather Events (2016-2022)" and "Predicting_Flight_Delays (2022 - US) Raw Data" provide data such as weather conditions, flight records, and delay/cancellation rates. Through descriptive analysis, including measures of frequency, central tendency, and dispersion, I aim to highlight the weather conditions and seasons associated with the highest rates of delays and cancellations. This will help airports and airlines better anticipate and manage operations during inclement weather.
+#### The business problem I am addressing is identifying the relationship between specific weather conditions and their impact on flight delays and cancellations at Chicago O’Hare International Airport. The two datasets, "Weather Events Data" and "Predicting_Flight_Delays (2022 - US) Raw Data" provide data such as weather events, flight records, and delay/cancellation rates. Through predictive analysis, I aim to highlight the relationship between weather conditions and delays and cancellations through a simple linear regression. This will help airports and airlines better anticipate and manage operations during inclement weather.
 
 # Set Up Instructions 
 ### To set up Venv in VS code: 
@@ -17,23 +17,24 @@ INST414 Final Project - Airport Project
 #### pip install numpy 
 #### pip install plotly 
 #### pip install brokeh 
+#### pip install sklearn
 
 # Running The Project 
 #### To run the main.py, you will enter "python3 main.py" in the terminal. 
+
+#### Please note that main.py does not run, however, other functions do run independently. It is a work in progress.
 
 # Code Package Structure 
 ### inst414-final-project-Erin-Keane
 
 ### data/
-#### extracted.py
-##### Flights_2022_1.csv
-##### Flights_2022_2.csv
-##### ...
-##### Flights_2022_12.csv
-##### WeatherEvents_Jan2016-Dec2022csv
-#### outputs.py 
-#### processed.py
-#### reference-tables.py
+#### original data/
+#### extracted/
+##### transformed/
+##### loaded/
+##### outputs/ 
+##### visualizations/
+##### reference tables/
 
 ### etl/
 #### extract.py
@@ -43,8 +44,6 @@ INST414 Final Project - Airport Project
 ### analysis/
 #### evaluate.py 
 #### model.py 
-#### exploration_vis.py 
-#### aggregation_descriptive_stat.py
 
 ### vis/ 
 #### visualizations.py
