@@ -9,14 +9,17 @@ I think im going to revise and build different dataframes
 based on the graph I want to make... Maybe.  
 '''
 
-import matplotlib
 import plotly 
 import bokeh 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
 
 
-'''
-what type of regression model do i want to do? 
+def scatter_plot_regression_results(X_test, y_test, y_pred):
+    plt.figure(figsize = (10, 6))
+    
+    plt.scatter(y_test, y_pred, alpha=0.5, label='Data points')
+    
+    plt.plot([])
+    
 
-
-
-'''

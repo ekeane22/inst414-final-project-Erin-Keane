@@ -27,7 +27,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from pathlib import Path
-
+import logging 
+import mylib 
    
 data_directory = Path('../data/original data')
 extracted_directory = Path('../data/extracted')
