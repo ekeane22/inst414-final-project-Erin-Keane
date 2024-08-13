@@ -1,0 +1,2 @@
+2024-08-13 14:09:41,859 - INFO - Successfully copied 'wf.csv' from ../data/transformed to ../data/loaded
+2024-08-13 14:09:46,526 - INFO - Loaded 'wf.csv' into dataframe

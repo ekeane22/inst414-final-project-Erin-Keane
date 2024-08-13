@@ -20,6 +20,13 @@ from pathlib import Path
 import shutil 
 import logging 
 
+logging.basicConfig(
+    filename='load.log',
+    filemode='w',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
 transformed_directory = Path('../data/transformed')
 loaded_directory = Path('../data/loaded')
     
@@ -36,10 +43,24 @@ def copy_wf(transformed_directory, loaded_directory):
         pd.DataFrame: dataframe that is moved to destination path. 
     
     '''
-    new_wf = pd.read_csv(transformed_directory / 'wf.csv', low_memory=False)
-    new_wf.to_csv(loaded_directory / 'wf.csv', index=False)
-    
-    return new_wf 
+    try:
+        loaded_directory.mkdir(parents=True, exist_ok=True)
+        src_file = transformed_directory / 'wf.csv'
+        dest_file = loaded_directory / 'wf.csv'
+
+        shutil.copy(src_file, dest_file)
+        logging.info(f"Successfully copied 'wf.csv' from {transformed_directory} to {loaded_directory}")
+        
+        df_wf = pd.read_csv(dest_file, low_memory=False)
+        logging.info("Loaded 'wf.csv' into dataframe")
+        
+        return df_wf
+    except FileNotFoundError as e: 
+        logging.error("The file was not found when copying", exc_info=True)
+        raise 
+    except Exception as e: 
+        logging.error("Error copying the file or loading the dataframe")
+        raise
 
 
 def main(): 

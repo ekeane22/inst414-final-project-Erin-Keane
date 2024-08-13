@@ -21,49 +21,69 @@ Returns:
 
 '''
 
-
 import pandas as pd 
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from pathlib import Path
 import logging 
-import mylib 
+
+logging.basicConfig(
+    filename='extract.log',
+    filemode='w',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
    
 data_directory = Path('../data/original data')
 extracted_directory = Path('../data/extracted')
 
-flight1_df = pd.read_csv(data_directory / "Flight1.csv")
-flight2_df = pd.read_csv(data_directory / "Flight2.csv")
-flight3_df = pd.read_csv(data_directory / "Flight3.csv")
-flight4_df = pd.read_csv(data_directory / "Flight4.csv")
-flight5_df = pd.read_csv(data_directory / "Flight5.csv")
-flight6_df = pd.read_csv(data_directory / "Flight6.csv")
-flight7_df = pd.read_csv(data_directory / "Flight7.csv")
-flight8_df = pd.read_csv(data_directory / "Flight8.csv")
-flight9_df = pd.read_csv(data_directory / "Flight9.csv")
-flight10_df = pd.read_csv(data_directory / "Flight10.csv")
-flight11_df = pd.read_csv(data_directory / "Flight11.csv")
-flight12_df = pd.read_csv(data_directory / "Flight12.csv")
+def load_flight_data(): 
+    try: 
+        flight_files = [f"Flight{i}.csv" for i in range(1, 13)]
+        logging.debug(f"Loading the flight data from the directory: {flight_files}")
+        flight_df = [pd.read_csv(data_directory / file) for file in flight_files]
+        result = pd.concat(flight_df, ignore_index=True)
+        logging.info(f" Successfully loaded the flight data")
+        return result
+    except Exception as e: 
+        logging.error("Error loading the flight data", exc_info=True)
+        raise 
 
-lake_df = pd.read_csv(data_directory / "storm_data_lake.csv")
-kendall_df = pd.read_csv(data_directory / "storm_data_kendall.csv")
-grundy_df = pd.read_csv(data_directory / "storm_data_grundy.csv")
-will_df = pd.read_csv(data_directory / "storm_data_will.csv")
-kankakee_df = pd.read_csv(data_directory / "storm_data_kankakee.csv")
-cook_df = pd.read_csv(data_directory / "storm_data_cook.csv")
-mchenry_df = pd.read_csv(data_directory / "storm_data_mchenry.csv")
-kane_df = pd.read_csv(data_directory / "storm_data_kane.csv")
-dupage_df = pd.read_csv(data_directory / "storm_data_dupage.csv")
-dekalb_df = pd.read_csv(data_directory / "storm_data_dekalb.csv")
+def load_storm_data():
+    try: 
+        storm_files = [
+            "storm_data_lake.csv", "storm_data_kendall.csv", "storm_data_grundy.csv", 
+            "storm_data_will.csv", "storm_data_kankakee.csv", "storm_data_cook.csv", 
+            "storm_data_mchenry.csv", "storm_data_kane.csv", "storm_data_dupage.csv", 
+            "storm_data_dekalb.csv"
+        ]
+        logging.debug(f"Loading the storm data from the directory: {storm_files}")
+        storm_df = [pd.read_csv(data_directory / file) for file in storm_files]
+        result = pd.concat(storm_df, ignore_index=True)
+        logging.info(f"Successfully loaded storm data")
+        return result
+    except Exception as e: 
+        logging.error("Error loading the storm data", exc_info=True)
+        raise
 
-
-f2022 = [flight1_df, flight2_df, flight3_df, flight4_df, flight5_df, flight6_df, flight7_df, flight8_df, flight9_df, flight10_df, flight11_df, flight12_df]
-flight22 = pd.concat(f2022, ignore_index=True)
-
-
-county = [lake_df, kendall_df, grundy_df, will_df, kankakee_df, cook_df, mchenry_df, kane_df, dupage_df, dekalb_df]
-county22 = pd.concat(county, ignore_index=True)
-
-flight22.to_csv(extracted_directory / 'flight22.csv', index=False)
-county22.to_csv(extracted_directory / 'county22.csv', index=False)
+def save(flight_df, storm_df): 
+    try: 
+        flight_df.to_csv(extracted_directory / 'flight22.csv', index=False)
+        storm_df.to_csv(extracted_directory / 'county22.csv', index=False)
+        logging.info("Data was successfully saved to CSV files")
+    except Exception as e: 
+        logging.error("Error saving data", exc_info=True)
+        raise
+    
+def process_data(): 
+    try: 
+        flight_data = load_flight_data()
+        storm_data = load_storm_data()
+        save(flight_data, storm_data)
+    except Exception as e: 
+        logging.error("Error processing data", exc_info=True)
+        raise 
+    
+if __name__=="__main__": 
+    process_data()

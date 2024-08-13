@@ -1,0 +1,6 @@
+2024-08-13 13:59:05,104 - INFO - Successfully loaded data from extracted directory
+2024-08-13 13:59:05,112 - DEBUG - Added a unique ID column to flight22 dataframe
+2024-08-13 13:59:05,115 - DEBUG - Successfully reordered columns in the county22 dataframe
+2024-08-13 13:59:05,116 - DEBUG - Renamed the columns in county22 dataframe
+2024-08-13 13:59:05,550 - DEBUG - Filtered the flights dataframe for "ORD" and "Chicago, IL".
+2024-08-13 13:59:14,246 - INFO - Successfully merged the dataframes and saved to wf.csv.

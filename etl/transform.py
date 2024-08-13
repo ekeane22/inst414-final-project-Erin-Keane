@@ -19,8 +19,12 @@ import numpy as np
 from pathlib import Path
 import logging 
 
-#logger = logging.getLogger(__name__)
-#logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(
+    filename='transform.log',
+    filemode='w',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 extracted_directory = Path('../data/extracted')
 transformed_directory = Path('../data/transformed')
@@ -35,11 +39,17 @@ def load_from_extracted(extracted_directory):
     Returns: 
         tuple: Contains the county22 and flight22 DataFrames. 
     '''
-    
-    county22 = pd.read_csv(extracted_directory / 'county22.csv')
-    flight22 = pd.read_csv(extracted_directory / 'flight22.csv')
-    return county22, flight22
-
+    try: 
+        county22 = pd.read_csv(extracted_directory / 'county22.csv')
+        flight22 = pd.read_csv(extracted_directory / 'flight22.csv')
+        logging.info("Successfully loaded data from extracted directory")
+        return county22, flight22
+    except FileNotFoundError as e: 
+        logging.error("The files were not found while loading data", exc_info=True)
+        raise 
+    except Exception as e: 
+        logging.error("Error loading data from the extracted directory", exc_info=True)
+        raise 
 def add_id_column(flight22): 
     '''
     Adds a unique ID column for flight22 DF. 
@@ -52,39 +62,8 @@ def add_id_column(flight22):
     
     '''
     flight22['ID'] = range(1, len(flight22) + 1)
+    logging.debug("Added a unique ID column to flight22 dataframe")
     return flight22
-
-def military_time(time_str): 
-    '''
-    Converts the columns to military time and format "HH:MM".
-    
-    Args: 
-        time_str (str): The time string to convert 
-        
-    Returns: 
-        str: The time in "HH;MM military time format. 
-    
-    '''
-    if pd.isna(time_str): 
-        return None 
-    
-    time_str = str(int(time_str)).zfill(4)
-    return f'{time_str[:2]}:{time_str[2:]}'
-
-def fix_flight22(flight22):
-    '''
-    Adds an ID column to flight22 DF and converts the DepTime column to military time. 
-    
-    Args: 
-        flight22 (DF): Contains flight information for Chicago O'Hare Airport.
-        
-    Returns: 
-        Df: Updated dataframe. 
-    '''
-    flight22 = add_id_column(flight22)
-    flight22['DepTime'] = flight22['DepTime'].apply(military_time)
-    return flight22
-
 
 def fix_county22(county22):
     '''
@@ -98,10 +77,14 @@ def fix_county22(county22):
         df: new county22 df with absoulte row number as the first column and not the last and the update time column. 
     
     '''
-    county22['BEGIN_TIME'] = county22['BEGIN_TIME'].apply(military_time)
-    columns = ["ABSOLUTE_ROWNUMBER"] + [col for col in county22.columns if col != "ABSOLUTE_ROWNUMBER"]
-    county22 = county22[columns]
-    return county22
+    try: 
+        columns = ["ABSOLUTE_ROWNUMBER"] + [col for col in county22.columns if col != "ABSOLUTE_ROWNUMBER"]
+        county22 = county22[columns]
+        logging.debug("Successfully reordered columns in the county22 dataframe")
+        return county22
+    except Exception as e: 
+        logging.error("Error fixing the countu22 dataframe", exc_info=True)
+        raise 
 
 
 def rename1(county22):
@@ -116,49 +99,52 @@ def rename1(county22):
         count22 (DF): updated Dataframe with consistent column names
         
         '''
-    county22 = county22.rename(columns={
-        'EVENT_ID': 'EventID', 
-        'CZ_NAME_STR': 'CZNameStr',
-        'BEGIN_LOCATION': 'BeginLocation',
-        'BEGIN_DATE': 'BeginDate',
-        'BEGIN_TIME': 'BeginTime',
-        'EVENT_TYPE': 'EventType',
-        'MAGNITUDE': 'Magnitude',
-        'TOR_F_SCALE': 'TorFScale',
-        'DEATHS_DIRECT': 'DeathsDirect',
-        'INJURIES_DIRECT': 'InjuriesDirect',
-        'DAMAGE_PROPERTY_NUM': 'DamagePropertyNum',
-        'DAMAGE_CROPS_NUM': 'DamageCropsNum',
-        'STATE_ABBR': 'State', 
-        'CZ_TIMEZONE': 'CZTimezome',
-        'MAGNITUDE_TYPE': 'MagnitudeType',
-        'EPISODE_ID': 'EpisodeID', 
-        'CZTYPE': 'CZType', 
-        'CZ_FIPS': 'CZFips', 
-        'INJURIES_INDIRECT': 'InjuriesIndirect', 
-        'DEATHS_INDIRECT': 'DeathsIndirect', 
-        'SOURCE': 'Source',
-        'FLOOD_CAUSE': 'FloodCause', 
-        'TOR_LENGTH': 'TorLength', 
-        'TOR_WIDTH': 'TorWidth', 
-        'BEGIN_RANGE': 'BeginRange', 
-        'BEGIN_AZIMUTH': 'BeginAzimuth', 
-        'END_RANGE': 'EndRange', 
-        'END_AZIMUTH': 'EndAzimuth', 
-        'END_LOCATION': 'EndLocation',
-        'END_DATE': 'EndDate', 
-        'END_TIME': 'EndTime',
-        'BEGIN_LAT': 'BeginLat', 
-        'BEGIN_LOT': 'BeginLot', 
-        'END_LAT': 'EndLat', 
-        'END_LOT': 'EndLot', 
-        'EVENT_NARRATIVE': 'EventNarrative', 
-        'EPISODE_NARRATIVE': 'EpisodeNarrative', 
-        'ABSOLUTE_ROWNUMBER': 'AbsoluteRowNumber'
-    })
-    return county22
-
-
+    try: 
+        county22 = county22.rename(columns={
+            'EVENT_ID': 'EventID', 
+            'CZ_NAME_STR': 'CZNameStr',
+            'BEGIN_LOCATION': 'BeginLocation',
+            'BEGIN_DATE': 'BeginDate',
+            'BEGIN_TIME': 'BeginTime',
+            'EVENT_TYPE': 'EventType',
+            'MAGNITUDE': 'Magnitude',
+            'TOR_F_SCALE': 'TorFScale',
+            'DEATHS_DIRECT': 'DeathsDirect',
+            'INJURIES_DIRECT': 'InjuriesDirect',
+            'DAMAGE_PROPERTY_NUM': 'DamagePropertyNum',
+            'DAMAGE_CROPS_NUM': 'DamageCropsNum',
+            'STATE_ABBR': 'State', 
+            'CZ_TIMEZONE': 'CZTimezome',
+            'MAGNITUDE_TYPE': 'MagnitudeType',
+            'EPISODE_ID': 'EpisodeID', 
+            'CZTYPE': 'CZType', 
+            'CZ_FIPS': 'CZFips', 
+            'INJURIES_INDIRECT': 'InjuriesIndirect', 
+            'DEATHS_INDIRECT': 'DeathsIndirect', 
+            'SOURCE': 'Source',
+            'FLOOD_CAUSE': 'FloodCause', 
+            'TOR_LENGTH': 'TorLength', 
+            'TOR_WIDTH': 'TorWidth', 
+            'BEGIN_RANGE': 'BeginRange', 
+            'BEGIN_AZIMUTH': 'BeginAzimuth', 
+            'END_RANGE': 'EndRange', 
+            'END_AZIMUTH': 'EndAzimuth', 
+            'END_LOCATION': 'EndLocation',
+            'END_DATE': 'EndDate', 
+            'END_TIME': 'EndTime',
+            'BEGIN_LAT': 'BeginLat', 
+            'BEGIN_LOT': 'BeginLot', 
+            'END_LAT': 'EndLat', 
+            'END_LOT': 'EndLot', 
+            'EVENT_NARRATIVE': 'EventNarrative', 
+            'EPISODE_NARRATIVE': 'EpisodeNarrative', 
+            'ABSOLUTE_ROWNUMBER': 'AbsoluteRowNumber'
+        })
+        logging.debug("Renamed the columns in county22 dataframe")
+        return county22
+    except Exception as e: 
+        logging.error('Error renaming columns in county22 dataframe', exc_info=True)
+        raise
 
 def filter_flights(flight22): 
     '''
@@ -170,8 +156,13 @@ def filter_flights(flight22):
     Returns: 
         Df: Updated dataframe. 
     '''
-    fflights22 = flight22[(flight22['Origin'] == 'ORD') & (flight22['OriginCityName'] == 'Chicago, IL')]
-    return fflights22
+    try:
+        filtered_flights = flight22[(flight22['Origin'] == 'ORD') & (flight22['OriginCityName'] == 'Chicago, IL')]
+        logging.debug('Filtered the flights dataframe for "ORD" and "Chicago, IL".')
+        return filtered_flights
+    except Exception as e:
+        logging.error('Error filtering flights dataframe', exc_info=True)
+        raise
 
 def merge(flight22, county22): 
     '''
@@ -185,27 +176,29 @@ def merge(flight22, county22):
         wf (DF): New merged dataframe with all columns from both dat asets.
     
     '''
-    fflights22 = flight22.copy()
-    
-    fflights22.loc[:, 'FlightDate'] = pd.to_datetime(fflights22['FlightDate'])
-    county22.loc[:, 'BeginDate'] = pd.to_datetime(county22['BeginDate'])
-    wf = pd.merge(fflights22, county22, left_on='FlightDate', right_on='BeginDate', how='outer')
-
-    wf.to_csv(transformed_directory / 'wf.csv', index=False)
-    return wf
+    try:
+        fflights22 = flight22.copy()
+        fflights22['FlightDate'] = pd.to_datetime(fflights22['FlightDate'])
+        county22['BeginDate'] = pd.to_datetime(county22['BeginDate'])
+        merged_df = pd.merge(fflights22, county22, left_on='FlightDate', right_on='BeginDate', how='outer')
+        merged_df.to_csv(transformed_directory / 'wf.csv', index=False)
+        logging.info('Successfully merged the dataframes and saved to wf.csv.')
+        return merged_df
+    except Exception as e:
+        logging.error('Error merging dataframes', exc_info=True)
+        raise
 
 def main(): 
     county22, flight22 = load_from_extracted(extracted_directory)
-    flight22 = fix_flight22(flight22)
+    flight22 = add_id_column(flight22)
     county22 = fix_county22(county22)
     county22 = rename1(county22)
     
     filtered_flights = filter_flights(flight22)
     
-    new = merge(filtered_flights, county22)
+    merged_df = merge(filtered_flights, county22)
     
-    print(new.head())
+    print(merged_df.head())
 
 if __name__ == "__main__":
     main()
-    

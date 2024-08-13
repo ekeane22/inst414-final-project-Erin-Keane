@@ -36,7 +36,6 @@ def evalaute(model, X_test, y_test):
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
-return #mean squared error and r2 
+# return #mean squared error and r2 
 
-#save the results to outputs/
-    
+#save the results to outputs/s

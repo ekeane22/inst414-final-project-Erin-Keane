@@ -30,12 +30,10 @@ storm_data_dekalb.csv
 county22.csv 
 flight22.csv
 
-<<<<<<< HEAD
 Data Dictionary_Weather Events Data.csv
-=======
-wf.csv 
-wf.csv
 
 Data Dictionary_Weather Events Data.csv 
 Data Dictonary_Weather Events Data.csv
->>>>>>> origin/main
+
+wf.csv 
+wf.csv
