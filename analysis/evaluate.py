@@ -9,33 +9,31 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression 
 from sklearn.metrics import mean_squared_error, r2_score 
 
-#transformed_directory = Path('../data/transformed')
-#Extracted_directory = Path('../data/extracted')
+logging.basicConfig(
+    filename='transform.log',
+    filemode='w',
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
-'''
-To evaluate my model, i am using mean squared error and r squared 
+loaded_directory = Path('../data/loaded')
+outputs_directory = Path('../data/outputs')
 
-'''
 
-# I would read in the csv from the model.py from outputs/
-
-def evalaute(model, X_test, y_test): 
+def read_csv(file_name):
     '''
-    Evaluates the linear regression model. 
-    
-    Args: 
-        model: the trained linear regression model
-        X_train (DF): features for training 
-        y_train(series): target variable for training 
-    
-    Returns: 
-        dict
-    
+    Reads the 'wf.csv' file from the loaded directory.
+
+    Returns:
+        pd.DataFrame: The dataframe read from the CSV file.
     '''
-    y_pred = model.predict(X_test)
-    mse = mean_squared_error(y_test, y_pred)
-    r2 = r2_score(y_test, y_pred)
-
-# return #mean squared error and r2 
-
-#save the results to outputs/s
+    try:
+        file_path = loaded_directory / 'wf.csv'
+        df = pd.read_csv(file_path, low_memory=False)
+        logging.info("Successfully read 'wf.csv' from the loaded directory")
+        return df
+    except Exception as e:
+        logging.error("Error occurred while reading 'wf.csv'", exc_info=True)
+        raise
+    
+def preprocessing()
