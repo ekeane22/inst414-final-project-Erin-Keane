@@ -21,7 +21,7 @@ import shutil
 import logging 
 
 logging.basicConfig(
-    filename='load.log',
+    filename='etl.log',
     filemode='w',
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'

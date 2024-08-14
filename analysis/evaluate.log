@@ -1,0 +1,10 @@
+2024-08-13 23:18:50,860 - INFO - Successfully read 'wf.csv' from the loaded directory
+2024-08-13 23:18:50,977 - INFO - The specified columns were dropped from the dataframe
+2024-08-13 23:18:51,040 - DEBUG - Filtered rows where CancellationCode is 'a', 'c', or 'd'. Rows before: 725396, after: 709433
+2024-08-13 23:18:51,112 - DEBUG - Filtered rows where EventType is 'Drought' or 'Rip Current'. Rows before: 709433, after: 702643
+2024-08-13 23:18:51,113 - DEBUG - Moved 'ID' column to the beginning of the dataframe and reset 'ID' to start at 1
+2024-08-13 23:18:51,113 - INFO - Successfully completed preprocessing1 steps
+2024-08-13 23:18:53,190 - INFO - Successfully saved the dataframe after preprocessing1 to ../data/outputs/wf_preprocessed.csv
+2024-08-13 23:18:55,360 - DEBUG - Applied one-hot encoding to the features
+2024-08-13 23:18:55,360 - INFO - Successfully completed preprocessing2 steps with one-hot encoding
+2024-08-13 23:23:26,359 - INFO - Successfully saved the preprocessed and encoded dataframe to ../data/outputs/wf_preprocessed_encoded.csv

@@ -29,7 +29,7 @@ from pathlib import Path
 import logging 
 
 logging.basicConfig(
-    filename='extract.log',
+    filename='etl.log',
     filemode='w',
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'

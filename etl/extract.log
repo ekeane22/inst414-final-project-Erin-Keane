@@ -1,5 +1,0 @@
-2024-08-13 14:10:49,277 - DEBUG - Loading the flight data from the directory: ['Flight1.csv', 'Flight2.csv', 'Flight3.csv', 'Flight4.csv', 'Flight5.csv', 'Flight6.csv', 'Flight7.csv', 'Flight8.csv', 'Flight9.csv', 'Flight10.csv', 'Flight11.csv', 'Flight12.csv']
-2024-08-13 14:10:55,461 - INFO -  Successfully loaded the flight data
-2024-08-13 14:10:55,582 - DEBUG - Loading the storm data from the directory: ['storm_data_lake.csv', 'storm_data_kendall.csv', 'storm_data_grundy.csv', 'storm_data_will.csv', 'storm_data_kankakee.csv', 'storm_data_cook.csv', 'storm_data_mchenry.csv', 'storm_data_kane.csv', 'storm_data_dupage.csv', 'storm_data_dekalb.csv']
-2024-08-13 14:10:55,608 - INFO - Successfully loaded storm data
-2024-08-13 14:11:16,362 - INFO - Data was successfully saved to CSV files
