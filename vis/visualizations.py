@@ -35,32 +35,5 @@ logging.basicConfig(
 visualization_directory = Path('../data/visualizations')
 outputs_directory = Path('../data/outputs')
     
-def load_metrics():
-    '''
-    Loads the model performance metrics from the CSV file
-    
-    Returns:
-        pd.DataFrame: The dataframe containing the performance metrics
-    '''
-    try:
-        file_path = outputs_directory / 'model_performance.csv'
-        metrics_df = pd.read_csv(file_path)
-        logging.info(f"Successfully loaded model performance metrics from {file_path}")
-        return metrics_df
-    except Exception as e:
-        logging.error("Error occurred while loading the model performance metrics", exc_info=True)
-        raise
 
-def scatter_regression(X_test, y_test, y_pred): 
-    '''
-    Creates a scatterplot with a regression line for model performance metrics.
-    The line is the predicted values, the scatters are the actual value.
-    
-    Parameters: 
-        X_test: The test features used in the regression model.
-        y_test: Test target values.
-        y_pred: Predicted target values from the regression model
-        
-    Returns: 
-        A PNG file with the scatter plot and regression line.
-    '''
+

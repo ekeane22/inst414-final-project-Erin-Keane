@@ -8,7 +8,7 @@ import logging
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression 
-from sklearn.metrics import mean_squared_error, r2_score 
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error 
 
 logging.basicConfig(
     filename='analysis.log',
@@ -19,6 +19,7 @@ logging.basicConfig(
 
 loaded_directory = Path('../data/loaded')
 outputs_directory = Path('../data/outputs')
+visualization_directory = Path('../data/visualizations')
 
 def read_csv(file_name='wf.csv'):
     '''
@@ -190,12 +191,44 @@ def test_regression(model, X_test, y_test):
         y_pred = model.predict(X_test)
         mse = mean_squared_error(y_test, y_pred)
         r2 = r2_score(y_test, y_pred)
+        mae = mean_absolute_error(y_test, y_pred)
 
-        logging.info(F" The model returned - MSE: {mse}, R2: {r2}")
-        return mse, r2
+        logging.info(F" The model returned - MSE: {mse}, R2: {r2}, MAE: {mae}")
+        return mse, r2, mae
     except Exception as e: 
         logging.error("Error occured when testing the regression model", exc_info=True)
         raise 
+def plot_regression_scatter(X_test, y_test, y_pred):
+    '''
+    Plots a scatter plot with regression line.
+    
+    Args:
+        X_test (pd.DataFrame): Test features
+        y_test (pd.Series): Actual target values
+        y_pred (np.array): Predicted target values
+    '''
+    try:
+        plt.figure(figsize=(10, 6))
+        sns.scatterplot(x=y_test, y=y_pred, color='blue', edgecolor='w', s=60)
+        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)  # Diagonal line for perfect prediction
+        plt.xlabel('Actual Weather Delay')
+        plt.ylabel('Predicted Weather Delay')
+        plt.title('Scatter Plot of Actual vs. Predicted Weather Delay')
+        plt.grid(True)
+        plt.savefig(visualization_directory / 'regression_scatterplot.png')  # Save the plot as a PNG file
+        plt.show()
+        logging.info("Regression scatter plot saved as 'regression_scatterplot.png'")
+    except Exception as e:
+        logging.error("Error occurred while plotting the regression scatter plot", exc_info=True)
+        raise
+        
+                
+'''
+visualization here 
+'''
+'''
+talk through a case
+'''
     
 def main(): 
     try: 
@@ -225,29 +258,35 @@ def main():
         logging.info(f"Successfully saved the preprocessed and encoded dataframe to {output_file_path_encoded}")
         print(f"Data saved to {output_file_path_encoded}")
         
-                # Split the data for regression
+        # Split the data for regression
         X_train, X_test, y_train, y_test = split_regression(df_wf_encoded)
         
         # Build the regression model
         model = build_regression(X_train, y_train)
         
         # Test the regression model
-        mse, r2 = test_regression(model, X_test, y_test)
+        mse, r2, mae = test_regression(model, X_test, y_test)
         
         print(f"Mean Squared Error: {mse}")
         print(f"R² Score: {r2}")
+        print(f"Mean Absolute Error: {mae}")
         
         # Save regression metrics to a new CSV file
        # Save the performance metrics to a CSV file
         metrics_file_path = outputs_directory / 'model_performance.csv'
         with open(metrics_file_path, mode='w', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(['Mean Squared Error', 'R² Score'])
-            writer.writerow([mse, r2])
+            writer.writerow(['Mean Squared Error', 'R² Score', 'Mean Absoulte Error'])
+            writer.writerow([mse, r2, mae])
         
         logging.info(f"Model performance metrics saved to {metrics_file_path}")
         print(f"Mean Squared Error: {mse}")
         print(f"R² Score: {r2}")
+        print(f"Mean Absolute Error: {mae}")
+        
+        # Plot and save the regression scatter plot
+        y_pred = model.predict(X_test)
+        plot_regression_scatter(X_test, y_test, y_pred)
         
     except Exception as e:
         logging.error("Error occurred in the main function", exc_info=True)
