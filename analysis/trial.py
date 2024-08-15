@@ -201,14 +201,14 @@ def test_regression(model, X_test, y_test):
 def plot_regression_scatter(X_test, y_test, y_pred):
     '''
     Plots a scatter plot with regression line.
-    
+
     Args:
         X_test (pd.DataFrame): Test features
         y_test (pd.Series): Actual target values
         y_pred (np.array): Predicted target values
     '''
     try:
-        plt.figure(figsize=(14, 8))
+        plt.figure(figsize=(10, 6))
         sns.scatterplot(x=y_test, y=y_pred, color='blue', edgecolor='w', s=60)
         plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)  # Diagonal line for perfect prediction
         plt.xlabel('Actual Weather Delay')
@@ -222,34 +222,57 @@ def plot_regression_scatter(X_test, y_test, y_pred):
         logging.error("Error occurred while plotting the regression scatter plot", exc_info=True)
         raise
 
-def analyze_event_impact(df):
-    '''
-    Analyzes the impact of different weather events on weather delays and plots the results.
 
+def regression_analysis_impact(df):
+    '''
+    Performs regression analysis to quantify the impact of different weather events on weather delays.
+    
     Args:
-        df (pd.DataFrame): The dataframe with event types and weather delays.
+        df (pd.DataFrame): The dataframe with one-hot encoded event types and weather delays.
 
     Returns:
         None
     '''
     try:
+        # Extract features and target variable
+        X = df.drop(columns=['WeatherDelay'])
+        y = df['WeatherDelay']
+        # Drop rows where 'WeatherDelay' or any feature is NaN
+        df_clean = df.dropna()
+        X_clean = df_clean.drop(columns=['WeatherDelay'])
+        y_clean = df_clean['WeatherDelay']
+        
+        # Build the regression model
+        model = LinearRegression()
+        model.fit(X_clean, y_clean)
+        
+        # Get coefficients and feature names
+        coefficients = model.coef_
+        feature_names = X.columns
+        coef_df = pd.DataFrame({'Feature': feature_names, 'Coefficient': coefficients})
+        
+        # Sort by absolute value of coefficient
+        coef_df['Abs_Coefficient'] = coef_df['Coefficient'].abs()
+        coef_df = coef_df.sort_values(by='Abs_Coefficient', ascending=False)
+        
+        # Plot the coefficients
         plt.figure(figsize=(14, 8))
-        sns.boxplot(x='EventType', y='WeatherDelay', data=df)
+        sns.barplot(x='Feature', y='Coefficient', data=coef_df, palette='viridis', hue=None)
         plt.xticks(rotation=90)
         plt.xlabel('Weather Event Type')
-        plt.ylabel('Weather Delay (minutes)')
-        plt.title('Impact of Different Weather Events on Weather Delay')
+        plt.ylabel('Coefficient')
+        plt.title('Impact of Different Weather Events on Weather Delay (Regression Coefficients)')
         plt.grid(True)
-        plt.savefig(visualization_directory / 'event_impact_analysis.png')  # Save the plot as a PNG file
+        plt.tight_layout()
+        plt.savefig(visualization_directory / 'regression_impact_analysis.png')  # Save the plot as a PNG file
         plt.show()
-        logging.info("Event impact analysis plot saved as 'event_impact_analysis.png'")
+        logging.info("Regression impact analysis plot saved as 'regression_impact_analysis.png'")
     except Exception as e:
-        logging.error("Error occurred while analyzing event impact", exc_info=True)
+        logging.error("Error occurred while performing regression impact analysis", exc_info=True)
         raise
 
-def main(): 
-    try: 
-        
+def main():
+    try:
         df_wf = read_csv()
         print("Data read successfully")
         print(df_wf.head())
@@ -304,8 +327,8 @@ def main():
         y_pred = model.predict(X_test)
         plot_regression_scatter(X_test, y_test, y_pred)
         
-        # Analyze event impact
-        analyze_event_impact(df_wf)
+        # Perform and plot regression analysis impact
+        regression_analysis_impact(df_wf_encoded)
         
     except Exception as e:
         logging.error("Error occurred in the main function", exc_info=True)
@@ -313,4 +336,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-        

@@ -221,7 +221,6 @@ def plot_regression_scatter(X_test, y_test, y_pred):
     except Exception as e:
         logging.error("Error occurred while plotting the regression scatter plot", exc_info=True)
         raise
-
 def analyze_event_impact(df):
     '''
     Analyzes the impact of different weather events on weather delays and plots the results.
@@ -246,10 +245,35 @@ def analyze_event_impact(df):
     except Exception as e:
         logging.error("Error occurred while analyzing event impact", exc_info=True)
         raise
-
-def main(): 
-    try: 
+def plot_heatmap(df):
+    '''
+    Plots a heatmap of the correlation matrix for the dataframe.
+    
+    Args:
+        #df (pd.DataFrame): The dataframe for which the correlation matrix will be plotted.
+    '''
+    try:
+        #Select only numeric columns for correlation matrix
+        numeric_df = df.select_dtypes(include=[np.number])
         
+        # Compute the correlation matrix
+        corr_matrix = numeric_df.corr()
+
+         #Plot the heatmap
+        plt.figure(figsize=(12, 10))
+        sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+        plt.title('Correlation Matrix Heatmap')
+        plt.savefig(visualization_directory / 'correlation_heatmap.png')  # Save the plot as a PNG file
+        plt.show()
+        logging.info("Correlation heatmap saved as 'correlation_heatmap.png'")
+    except Exception as e:
+        logging.error("Error occurred while plotting the heatmap", exc_info=True)
+        raise
+
+
+def main():
+    try:
+        # Read the data
         df_wf = read_csv()
         print("Data read successfully")
         print(df_wf.head())
@@ -300,12 +324,11 @@ def main():
         print(f"R² Score: {r2}")
         print(f"Mean Absolute Error: {mae}")
         
-        # Plot and save the regression scatter plot
-        y_pred = model.predict(X_test)
-        plot_regression_scatter(X_test, y_test, y_pred)
-        
         # Analyze event impact
         analyze_event_impact(df_wf)
+        
+        # Plot heatmap
+        plot_heatmap(df_wf)
         
     except Exception as e:
         logging.error("Error occurred in the main function", exc_info=True)
@@ -313,4 +336,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-        
