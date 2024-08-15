@@ -2,12 +2,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import csv
 from pathlib import Path
 import logging 
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression 
+from sklearn.metrics import mean_squared_error, r2_score 
 
 logging.basicConfig(
-    filename='evaluate.log',
+    filename='analysis.log',
     filemode='w',
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'
@@ -42,7 +46,9 @@ def preprocessing1(df):
         'InjuriesIndirect', 'DeathsIndirect', 'Source', 'FloodCause', 'TorLength', 
         'TorWidth', 'BeginRange', 'BeginAzimuth', 'EndRange', 'EndAzimuth', 
         'EndLocation', 'BeginLat', 'BEGIN_LON', 'EndLat', 'EventNarrative', 
-        'EpisodeNarrative', 'END_LON', 'Month', 'DayofMonth', 'DayOfWeek'
+        'EpisodeNarrative', 'END_LON', 'Month', 'DayofMonth', 'DayOfWeek',
+        'Year', 'CZNameStr', 'Magnitude', 'EventID', 'OriginCityName', 'DestCityName',
+        'FlightDate', 'DepTime', 'BeginDate', 'BeginTime', 'EndDate', 'EndTime',
     ] 
     try: 
         df.drop(columns=columns_to_drop, inplace=True)
@@ -86,16 +92,13 @@ def preprocessing2(df):
     '''
     try:
         # Replace NaN values in 'CancellationCode' and 'WeatherDelay'
-        df['CancellationCode'] = df['CancellationCode'].fillna(0)
-        df['WeatherDelay'] = df['WeatherDelay'].fillna(0)
-        
+        df['CancellationCode'] = df['CancellationCode'].fillna(0)        
         # Creating interaction terms
-        df['EventType_Cancellation'] = df['EventType'].astype(str) + '_' + df['Cancelled'].astype(str)
-        df['EventType_CancellationCode'] = df['EventType'].astype(str) + '_' + df['CancellationCode'].astype(str)
         df['EventType_WeatherDelay'] = df['EventType'].astype(str) + '_' + df['WeatherDelay'].astype(str)
         
+
         # List of columns to one-hot encode
-        categorical_features = ['EventType', 'EventType_Cancellation', 'EventType_WeatherDelay']
+        categorical_features = ['EventType']
 
         # Verify that the columns exist
         missing_cols = [col for col in categorical_features if col not in df.columns]
@@ -110,9 +113,8 @@ def preprocessing2(df):
         encoded_features = encoder.fit_transform(df[categorical_features])
         encoded_feature_names = encoder.get_feature_names_out(categorical_features)
         one_hot_encoded_df = pd.DataFrame(encoded_features, columns=encoded_feature_names)
-
-        # Add the 'ID' column to the one-hot encoded dataframe
-        one_hot_encoded_df['ID'] = df['ID']
+        
+        one_hot_encoded_df['WeatherDelay']=df['WeatherDelay']
         
         logging.debug("Applied one-hot encoding to the features")
         logging.info("Successfully completed preprocessing2 steps with one-hot encoding")
@@ -120,40 +122,136 @@ def preprocessing2(df):
     except Exception as e:
         logging.error("Error occurred during preprocessing2", exc_info=True)
         raise
-def main():
-    try:
-        # Read the data
+    
+def split_regression(one_hot_encoded_df):
+    '''
+    Splits the dataframe into training and test sets.
+
+    Args:
+        df (pd.DataFrame): The dataframe to split.
+        
+    Returns:
+        X_train (pd.DataFrame): Features for the training set.
+        X_test (pd.DataFrame): Features for the test set.
+        y_train (pd.Series): Target for the training set.
+        y_test (pd.Series): Target for the test set
+    '''
+    try: 
+        X = one_hot_encoded_df.drop(['WeatherDelay'], axis=1) 
+        y = one_hot_encoded_df['WeatherDelay']
+        
+                # Ensure no NaN values in the target variable
+        if y.isnull().any():
+            y = y.fillna(0)
+            logging.debug("Replaced NaN values in target variable 'WeatherDelay' with 0")
+        
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+        logging.info("The data was successfully split for the regression model")
+        return X_train, X_test, y_train, y_test
+    except Exception as e: 
+        logging.error("Error when splitting data for regression", exc_info=True)
+        raise
+    
+def build_regression(X_train, y_train): 
+    '''
+    Builds the linear regression model.
+    
+    Args: 
+        X_train (DF): Features 
+        y_train (DF): Target 
+        
+    Returns: 
+        Linear Regression Model 
+    '''
+    try: 
+        model = LinearRegression()
+        model.fit(X_train, y_train)
+        logging.info("Linear regression model was trained successfully")
+        return model 
+    except Exception as e: 
+        logging.error("Error when building the regression model", exc_info=True)
+        raise 
+    
+def test_regression(model, X_test, y_test):
+    '''
+    Tests the linear regression model.
+    
+    Args: 
+        model (LinearRegression):
+        X_test (DF): Features
+        y_test (DF): Target
+        
+    Returns: 
+        mse (float): Mean Squared Error of the model on the test set
+        r2 (float): R2 score of the model on the test set
+        
+    '''
+    try: 
+        y_pred = model.predict(X_test)
+        mse = mean_squared_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
+
+        logging.info(F" The model returned - MSE: {mse}, R2: {r2}")
+        return mse, r2
+    except Exception as e: 
+        logging.error("Error occured when testing the regression model", exc_info=True)
+        raise 
+    
+def main(): 
+    try: 
+        
         df_wf = read_csv()
         print("Data read successfully")
-        print(df_wf.head())  # Check the initial dataframe
-
+        print(df_wf.head())
+        
         # Apply preprocessing1
         df_wf = preprocessing1(df_wf)
         print("Completed preprocessing1")
-        print(df_wf.head())  # Check the dataframe after preprocessing1
+        print(df_wf.head())
         
         # Save the intermediate dataframe after preprocessing1
         output_file_path_intermediate = outputs_directory / 'wf_preprocessed.csv'
         df_wf.to_csv(output_file_path_intermediate, index=False)
         logging.info(f"Successfully saved the dataframe after preprocessing1 to {output_file_path_intermediate}")
         print(f"Data after preprocessing1 saved to {output_file_path_intermediate}")
-
+        
         # Apply preprocessing2 with one-hot encoding
         df_wf_encoded = preprocessing2(df_wf)
         print("Completed preprocessing2")
         print(df_wf_encoded.head())  # Check the dataframe after preprocessing2
-
-        # Save the updated dataframe to the outputs directory
+        
         output_file_path_encoded = outputs_directory / 'wf_preprocessed_encoded.csv'
         df_wf_encoded.to_csv(output_file_path_encoded, index=False)
         logging.info(f"Successfully saved the preprocessed and encoded dataframe to {output_file_path_encoded}")
         print(f"Data saved to {output_file_path_encoded}")
-
+        
+                # Split the data for regression
+        X_train, X_test, y_train, y_test = split_regression(df_wf_encoded)
+        
+        # Build the regression model
+        model = build_regression(X_train, y_train)
+        
+        # Test the regression model
+        mse, r2 = test_regression(model, X_test, y_test)
+        
+        print(f"Mean Squared Error: {mse}")
+        print(f"R² Score: {r2}")
+        
+        # Save regression metrics to a new CSV file
+       # Save the performance metrics to a CSV file
+        metrics_file_path = outputs_directory / 'model_performance.csv'
+        with open(metrics_file_path, mode='w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['Mean Squared Error', 'R² Score'])
+            writer.writerow([mse, r2])
+        
+        logging.info(f"Model performance metrics saved to {metrics_file_path}")
+        print(f"Mean Squared Error: {mse}")
+        print(f"R² Score: {r2}")
+        
     except Exception as e:
         logging.error("Error occurred in the main function", exc_info=True)
         raise
-
+    
 if __name__ == "__main__":
     main()
-
-

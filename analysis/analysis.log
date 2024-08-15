@@ -1,0 +1,15 @@
+2024-08-15 15:10:53,718 - INFO - Successfully read 'wf.csv' from the loaded directory
+2024-08-15 15:10:53,808 - INFO - The specified columns were dropped from the dataframe
+2024-08-15 15:10:53,845 - DEBUG - Filtered rows where CancellationCode is 'a', 'c', or 'd'. Rows before: 725396, after: 709433
+2024-08-15 15:10:53,879 - DEBUG - Filtered rows where EventType is 'Drought' or 'Rip Current'. Rows before: 709433, after: 702643
+2024-08-15 15:10:53,880 - DEBUG - Moved 'ID' column to the beginning of the dataframe and reset 'ID' to start at 1
+2024-08-15 15:10:53,880 - INFO - Successfully completed preprocessing1 steps
+2024-08-15 15:10:54,506 - INFO - Successfully saved the dataframe after preprocessing1 to ../data/outputs/wf_preprocessed.csv
+2024-08-15 15:10:54,855 - DEBUG - Applied one-hot encoding to the features
+2024-08-15 15:10:54,855 - INFO - Successfully completed preprocessing2 steps with one-hot encoding
+2024-08-15 15:10:56,933 - INFO - Successfully saved the preprocessed and encoded dataframe to ../data/outputs/wf_preprocessed_encoded.csv
+2024-08-15 15:10:56,945 - DEBUG - Replaced NaN values in target variable 'WeatherDelay' with 0
+2024-08-15 15:10:56,982 - INFO - The data was successfully split for the regression model
+2024-08-15 15:10:57,080 - INFO - Linear regression model was trained successfully
+2024-08-15 15:10:57,085 - INFO -  The model returned - MSE: 966.5063586475278, R2: 0.0030917184755023808
+2024-08-15 15:10:57,086 - INFO - Model performance metrics saved to ../data/outputs/model_performance.csv
