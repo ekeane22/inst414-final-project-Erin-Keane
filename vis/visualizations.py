@@ -7,15 +7,10 @@ import numpy as np
 from pathlib import Path
 import logging 
 
+logger = logging.getLogger(__name__)
 
-logging.basicConfig(
-    filename='vis.log',
-    filemode='w',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-outputs_directory = Path('../data/outputs')
-visualization_directory = Path('../data/visualizations')
+outputs_directory = Path('data/outputs')
+visualization_directory = Path('data/visualizations')
 
 
 def read_data_for_eda(file_name='wf_preprocessed.csv'):

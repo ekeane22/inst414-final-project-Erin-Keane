@@ -28,26 +28,22 @@ import numpy as np
 from pathlib import Path
 import logging 
 
-logging.basicConfig(
-    filename='etl.log',
-    filemode='w',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logger = logging.getLogger(__name__)
    
-data_directory = Path('../data/original data')
-extracted_directory = Path('../data/extracted')
+data_directory = Path('data/original data')
+extracted_directory = Path('data/extracted')
 
 def load_flight_data(): 
     try: 
         flight_files = [f"Flight{i}.csv" for i in range(1, 13)]
-        logging.debug(f"Loading the flight data from the directory: {flight_files}")
+        logger.debug(f"Data directory: {data_directory}")
+        logger.debug(f"Loading the flight data from the directory: {flight_files}")
         flight_df = [pd.read_csv(data_directory / file) for file in flight_files]
         result = pd.concat(flight_df, ignore_index=True)
-        logging.info(f" Successfully loaded the flight data")
+        logger.info(f"Successfully loaded the flight data")
         return result
     except Exception as e: 
-        logging.error("Error loading the flight data", exc_info=True)
+        logger.error("Error loading the flight data", exc_info=True)
         raise 
 
 def load_storm_data():

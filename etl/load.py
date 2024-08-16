@@ -11,15 +11,10 @@ from pathlib import Path
 import shutil 
 import logging 
 
-logging.basicConfig(
-    filename='etl.log',
-    filemode='w',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logger = logging.getLogger(__name__)
 
-transformed_directory = Path('../data/transformed')
-loaded_directory = Path('../data/loaded')
+transformed_directory = Path('data/transformed')
+loaded_directory = Path('data/loaded')
     
 
 def copy_wf(transformed_directory, loaded_directory): 

@@ -19,15 +19,10 @@ import numpy as np
 from pathlib import Path
 import logging 
 
-logging.basicConfig(
-    filename='etl.log',
-    filemode='w',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logger = logging.getLogger(__name__)
 
-extracted_directory = Path('../data/extracted')
-transformed_directory = Path('../data/transformed')
+extracted_directory = Path('data/extracted')
+transformed_directory = Path('data/transformed')
 
 def load_from_extracted(extracted_directory): 
     '''
@@ -67,7 +62,6 @@ def add_id_column(flight22):
 
 def fix_county22(county22):
     '''
-    Converts BEGIN_TIME column to military time.
     Moves the Absoulte row number from the last column to the first columnin the county22 DF. 
     
     Args: 

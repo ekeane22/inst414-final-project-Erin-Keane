@@ -10,16 +10,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression 
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error 
 
-logging.basicConfig(
-    filename='analysis.log',
-    filemode='w',
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
+logger = logging.getLogger(__name__)
 
-loaded_directory = Path('../data/loaded')
-outputs_directory = Path('../data/outputs')
-visualization_directory = Path('../data/visualizations')
+loaded_directory = Path('data/loaded')
+outputs_directory = Path('data/outputs')
+visualization_directory = Path('data/visualizations')
 
 def read_csv(file_name='wf.csv'):
     '''
