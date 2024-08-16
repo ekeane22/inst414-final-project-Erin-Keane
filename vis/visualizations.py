@@ -14,10 +14,13 @@ visualization_directory = Path('data/visualizations')
 
 def read_data_for_eda(file_name='wf_preprocessed.csv'):
     '''
-    Reads the file in for EDA analysis on the wf_preprocessed.csv
-    
-    Returns: 
-        DF: the dataframe of the csv file.
+    Reads a CSV file and returns a DataFrame for exploratory data analysis (EDA).
+
+    Args:
+        file_name (str): Name of the CSV file to read (default is 'wf_preprocessed.csv').
+
+    Returns:
+        df: DataFrame containing the data from the CSV file.
     '''
     try: 
         file_path = outputs_directory / file_name
@@ -33,10 +36,10 @@ def clean_data(df):
     Removes rows with 0, NaN, or Null values in 'WeatherDelay'.
     
     Args:
-        df (pd.DataFrame): The dataframe to clean.
+        df (DF): The dataframe to clean.
     
     Returns:
-        pd.DataFrame: The cleaned dataframe.
+        df: The cleaned dataframe.
     '''
     try:
         initial_row_count = df.shape[0]
@@ -52,7 +55,11 @@ def clean_data(df):
     
 def event_type_bar_chart(df): 
     '''
-    Bar Cahrt for 'EventType' counts.
+    Generates and saves a bar chart showing counts of different weather event types.
+
+    Args:
+        df (DF): The DataFrame containing the 'EventType' column.
+
     '''
     try: 
         df_cleaned = clean_data(df)
@@ -65,7 +72,7 @@ def event_type_bar_chart(df):
         plt.xlabel('Event Type', fontsize=12)
         plt.ylabel('Count', fontsize=12)
         plt.tight_layout()
-        plt.subplots_adjust(bottom=0.2)
+        plt.subplots_adjust(bottom=0.3)
         plt.savefig(visualization_directory / 'eda_event_type_counts.png')
         plt.show()
         logging.info("Bar chart for 'EventType' saved successfully")
@@ -74,8 +81,10 @@ def event_type_bar_chart(df):
         
 def weather_delay_boxplot(df):
     '''
-    Box plot for 'WeatherDelay' and 'EventType'
-    
+    Generates and saves a box plot showing the distribution of weather delays by event type.
+
+    Args:
+        df (DF): The DataFrame containing 'WeatherDelay' and 'EventType' columns.
     '''
     try: 
         df_cleaned = clean_data(df)
@@ -92,6 +101,9 @@ def weather_delay_boxplot(df):
 
 
 def main(): 
+    '''
+    Main function to read data, generate, and save visualizations for EDA.
+    '''
     df = read_data_for_eda()
 
     # Create visualizations

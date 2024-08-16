@@ -1,16 +1,8 @@
 '''
-Write code to pull the data in from the file that the csv was stored in. 
-This is /data under etl. 
 This involves making decisions and handling missing values, duplicates, consistent attribute naming, 
-robust unique IDs, tidying and normalizing data, joining and merging datasets. Remember that the goal 
+robust unique IDs, tidying and normalizing data, joining and merging datasets. The goal 
 is to maintain the integrity of the data and transform it into analytical data.
-
-In this .py, I need to make edits to the csv's, one of the .csv's includes lots of rows and columns I dont need. 
-
-Returns: 
-    df: The fully combined dataframe from the weather and the flights. 
 '''
-
 
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -47,7 +39,7 @@ def load_from_extracted(extracted_directory):
         raise 
 def add_id_column(flight22): 
     '''
-    Adds a unique ID column for flight22 DF. 
+    Adds a unique ID column for flight22 DataFrame. 
     
     Args: 
         flight22 (Df): Contains flight information for Chicago O'Hare Airport.
@@ -62,13 +54,13 @@ def add_id_column(flight22):
 
 def fix_county22(county22):
     '''
-    Moves the Absoulte row number from the last column to the first columnin the county22 DF. 
+    Moves the 'ABSOLUTE_ROWNUMBER' column from the last column to the first columnin the county22 DataFrame. 
     
     Args: 
         county22 (DF): Contains county weather events that surround Chicago O'Hare Airport.
         
     Returns: 
-        df: new county22 df with absoulte row number as the first column and not the last and the update time column. 
+        df: new county22 df with 'ABSOLUTE_ROWNUMBER' column as the first column and not the last and the update time column. 
     
     '''
     try: 
@@ -90,7 +82,7 @@ def rename1(county22):
         county22 (DF): Contains county weather events that surround Chicago O'Hare Airport.
         
     Returns: 
-        count22 (DF): updated Dataframe with consistent column names
+        count22 (DF): updated Dataframe with consistent column names.
         
         '''
     try: 
@@ -142,13 +134,13 @@ def rename1(county22):
 
 def filter_flights(flight22): 
     '''
-    Filters the flight22 dataframe for flights originating from "ORD" and where OriginCityName is "Chicago, IL"
+    Filters the flight22 dataframe for flights originating from "ORD" and where OriginCityName is "Chicago, IL".
     
     Args: 
         flight22 (DF): Contains flight information for Chicago O'Hare Airport.
         
     Returns: 
-        Df: Updated dataframe. 
+        DF: Updated dataframe. 
     '''
     try:
         filtered_flights = flight22[(flight22['Origin'] == 'ORD') & (flight22['OriginCityName'] == 'Chicago, IL')]
@@ -160,7 +152,7 @@ def filter_flights(flight22):
 
 def merge(flight22, county22): 
     '''
-    Merges flight22 and county22 dataframes on BeginDate and FlightDate
+    Merges flight22 and county22 dataframes on BeginDate and FlightDat.
     
     Args: 
         county22 (DF): Contains county weather events that surround Chicago O'Hare Airport.
@@ -183,6 +175,9 @@ def merge(flight22, county22):
         raise
 
 def main(): 
+    '''
+    Main function to execute data processing (loading, transforming, and merging datasets)
+    '''
     county22, flight22 = load_from_extracted(extracted_directory)
     flight22 = add_id_column(flight22)
     county22 = fix_county22(county22)

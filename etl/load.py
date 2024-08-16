@@ -1,7 +1,3 @@
-'''
-technically, in this function, going to pull from transformed directory to here 
-then, move it to the loaded folder in the data directory
-'''
 
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -19,14 +15,18 @@ loaded_directory = Path('data/loaded')
 
 def copy_wf(transformed_directory, loaded_directory): 
     '''
-    Copies the wf.csv file from the transformed directory into the loaded directory. 
-    
-    Args: 
-        transformed_directory (Path): source path 
-        loaded_directory (Path): destination path 
-    
-    Returns: 
-        pd.DataFrame: dataframe that is moved to destination path. 
+    Copies the 'wf.csv' file from the transformed directory to the loaded directory and loads it into a DataFrame.
+
+    Args:
+        transformed_directory (Path): Path to the source directory containing the 'wf.csv' file.
+        loaded_directory (Path): Path to the destination directory where the 'wf.csv' file will be copied.
+
+    Returns:
+        DF: DataFrame loaded from the 'wf.csv' file in the destination directory.
+
+    Raises:
+        FileNotFoundError: If the 'wf.csv' file is not found in the source directory.
+        Exception: For other errors that occur during copying or loading the file.
     
     '''
     try:
@@ -50,6 +50,9 @@ def copy_wf(transformed_directory, loaded_directory):
 
 
 def main(): 
+    '''
+    Main function to execute the copying and loading of 'wf.csv' file from the transformed directory to the loaded directory.
+    '''
     df_wf = copy_wf(transformed_directory, loaded_directory)
     print(df_wf.head())
     

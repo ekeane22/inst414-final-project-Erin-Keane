@@ -34,6 +34,16 @@ data_directory = Path('data/original data')
 extracted_directory = Path('data/extracted')
 
 def load_flight_data(): 
+    '''
+    Loads and concatenates CSV files containing flight data.
+    
+    The function reads 12 CSV files that corresponds the monthly flight data for the year 2022. 
+    It concatenates all 12 CSVs into a single DataFrame, and returns it. 
+    
+    Returns: 
+        flight_df (DF): Concatenated flight data.
+    
+    '''
     try: 
         flight_files = [f"Flight{i}.csv" for i in range(1, 13)]
         logger.debug(f"Data directory: {data_directory}")
@@ -47,6 +57,19 @@ def load_flight_data():
         raise 
 
 def load_storm_data():
+    '''
+    Loads and concatenates CSV files constaining storm data. 
+    
+    The function reads multiple CSV files corresponding to weather event data from the 10
+    counties that surround Chicago O'Hare International Airport within 50 miles. 
+    
+    Concatenates the 10 CSV files into a single DataFrame, and Returns it. 
+    
+    Returns: 
+        storm_df (DF): Concatenated storm data.
+    
+    '''
+    
     try: 
         storm_files = [
             "storm_data_lake.csv", "storm_data_kendall.csv", "storm_data_grundy.csv", 
@@ -64,6 +87,17 @@ def load_storm_data():
         raise
 
 def save(flight_df, storm_df): 
+    '''
+    Saves the concatenated flight and storm data to CSV files. 
+    
+    Args: 
+        flight_df (DF): The DataFrame containing concatenated flight data.
+        storm_df (DF): The DataFrame containing concatenated storm data.
+        
+    Returns: 
+        Exception if an error occurs while saving the data.
+
+    '''
     try: 
         flight_df.to_csv(extracted_directory / 'flight22.csv', index=False)
         storm_df.to_csv(extracted_directory / 'county22.csv', index=False)
@@ -73,6 +107,15 @@ def save(flight_df, storm_df):
         raise
     
 def process_data(): 
+    '''
+    Processes the flight and storm data by loading, concatenating, and saving.
+
+    The function loads flight and storm data, concatenates the data from multiple CSV files,
+    and saves the result to the 'extracted' directory.
+    
+    Raises:
+        Exception if an error occurs during data processing.
+    '''
     try: 
         flight_data = load_flight_data()
         storm_data = load_storm_data()

@@ -19,9 +19,14 @@ visualization_directory = Path('data/visualizations')
 def read_csv(file_name='wf.csv'):
     '''
     Reads the 'wf.csv' file from the loaded directory.
-
+    
+    Args: 
+        file_name (str): Name of the CSV file to read. Defaults to 'wf.csv'.
     Returns:
-        pd.DataFrame: The dataframe read from the CSV file.
+        DF: The dataframe read from the CSV file.
+        
+    Raises:
+        Exception: For errors encountered while reading the CSV file.
     '''
     try:
         file_path = loaded_directory / file_name
@@ -33,6 +38,19 @@ def read_csv(file_name='wf.csv'):
         raise
 
 def preprocessing1(df): 
+    '''
+    Preprocesses the dataframe by dropping unnecessary columns, filtering rows, and adjusting the 'ID' column.
+
+    Args:
+        DF: The dataframe to preprocess.
+
+    Returns:
+        DF: The preprocessed dataframe.
+
+    Raises:
+        Exception: For errors encountered during preprocessing.
+    
+    '''
     columns_to_drop = [
         'Quarter', 'OriginStateName', 'OriginState', 'DestState', 'DestStateName', 
         'CarrierDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay', 
@@ -81,10 +99,13 @@ def preprocessing2(df):
     Creates interaction terms for feature engineering and applies one-hot encoding.
 
     Args:
-        df (pd.DataFrame): The dataframe to preprocess.
+        DF: The dataframe to preprocess.
 
     Returns:
-        pd.DataFrame: The dataframe with new interaction columns and one-hot encoded features.
+        DF: The dataframe with new interaction columns and one-hot encoded features.
+    Raises: 
+        KeyError: If expected columns for one-hot encoding are missing.
+        Exception: For other errors encountered during preprocessing.
     '''
     try:
         # Replace NaN values in 'CancellationCode' and 'WeatherDelay'
@@ -120,16 +141,19 @@ def preprocessing2(df):
     
 def split_regression(one_hot_encoded_df):
     '''
-    Splits the dataframe into training and test sets.
+    Splits the dataframe into training and test sets for regression.
 
     Args:
-        df (pd.DataFrame): The dataframe to split.
+        one_hot_encoded_df (DF): The dataframe with one-hot encoded features to split.
         
     Returns:
         X_train (pd.DataFrame): Features for the training set.
         X_test (pd.DataFrame): Features for the test set.
         y_train (pd.Series): Target for the training set.
-        y_test (pd.Series): Target for the test set
+        y_test (pd.Series): Target for the test set.
+        
+    Raises:
+        Exception: For errors encountered during the splitting process.
     '''
     try: 
         
@@ -152,11 +176,14 @@ def build_regression(X_train, y_train):
     Builds the linear regression model.
     
     Args: 
-        X_train (DF): Features 
-        y_train (DF): Target 
+        X_train (DF): Training features. 
+        y_train (DF): Training target.
         
     Returns: 
         Linear Regression Model 
+        
+    Raises:
+        Exception: For errors encountered during model building and training.
     '''
     try: 
         model = LinearRegression()
@@ -172,14 +199,17 @@ def test_regression(model, X_test, y_test):
     Tests the linear regression model.
     
     Args: 
-        model (LinearRegression):
-        X_test (DF): Features
-        y_test (DF): Target
+        model (LinearRegression): The trained linear regression model.
+        X_test (DF): Test features.
+        y_test (DF): Test target.
         
     Returns: 
-        mse (float): Mean Squared Error of the model on the test set
-        r2 (float): R2 score of the model on the test set
-        mae (float): Mean Absolute Error of the model on the test set
+        mse (float): Mean Squared Error of the model on the test set.
+        r2 (float): R2 score of the model on the test set.
+        mae (float): Mean Absolute Error of the model on the test set.
+    
+    Raises:
+        Exception: For errors encountered during model testing.
     '''
     try: 
         y_pred = model.predict(X_test)
@@ -197,9 +227,9 @@ def plot_regression_scatter(X_test, y_test, y_pred):
     Plots a scatter plot with regression line.
     
     Args:
-        X_test (pd.DataFrame): Test features
-        y_test (pd.Series): Actual target values
-        y_pred (np.array): Predicted target values
+        X_test (pd.DataFrame): Test features.
+        y_test (pd.Series): Actual target values.
+        y_pred (np.array): Predicted target values.
     '''
     try:
         plt.figure(figsize=(14, 8))
@@ -222,18 +252,13 @@ def plot_regression_scatter(X_test, y_test, y_pred):
         logging.error("Error occurred while plotting the regression scatter plot", exc_info=True)
         raise
     
-#maybe 
 def regression_analysis_impact(df):
     '''
     Performs regression analysis to quantify the impact of different weather events on weather delays.
     
     Args:
-        df (pd.DataFrame): The dataframe with one-hot encoded event types and weather delays.
-
-    Returns:
-    
+        df (DF): The dataframe with one-hot encoded event types and weather delays.    
     '''
-    
     
     try:
         
@@ -287,10 +312,7 @@ def analyze_event_impact(df):
     Analyzes the impact of different weather events on weather delays and plots the results.
 
     Args:
-        df (pd.DataFrame): The dataframe with event types and weather delays.
-
-    Returns:
-        
+        df (DF): The dataframe with event types and weather delays.
     '''
     try:
         df_clean = df.dropna(subset=['EventType', 'WeatherDelay'])
@@ -315,6 +337,10 @@ def analyze_event_impact(df):
 
 
 def main(): 
+    '''
+    Main function to run the data analysis pipeline, including reading data, preprocessing, 
+    encoding, training, and evaluating the regression model, and plotting results.
+    '''
     try: 
         
         df_wf = read_csv()
