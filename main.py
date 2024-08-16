@@ -14,7 +14,7 @@ from etl.transform import main as transform_data
 from etl.load import main as load_data 
 from analysis.evaluate import (
     preprocessing1, preprocessing2, split_regression, build_regression, 
-    test_regression, plot_regression_scatter, analyze_event_impact
+    test_regression, plot_regression_scatter, analyze_event_impact, regression_analysis_impact
 )
 from vis.visualizations import main as visualize_data
 
@@ -64,6 +64,8 @@ def main():
         y_pred = model.predict(X_test)
         plot_regression_scatter(X_test, y_test, y_pred)
         analyze_event_impact(df_wf)
+        regression_analysis_impact(df_wf_encoded)
+        
         visualize_data()
 
         logger.info("Main script completed successfully.")

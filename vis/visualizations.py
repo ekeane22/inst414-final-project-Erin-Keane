@@ -27,19 +27,47 @@ def read_data_for_eda(file_name='wf_preprocessed.csv'):
     except Exception as e:
         logging.error("Error occurred while reading 'wf.csv'", exc_info=True)
         raise
+    
+def clean_data(df):
+    '''
+    Removes rows with 0, NaN, or Null values in 'WeatherDelay'.
+    
+    Args:
+        df (pd.DataFrame): The dataframe to clean.
+    
+    Returns:
+        pd.DataFrame: The cleaned dataframe.
+    '''
+    try:
+        initial_row_count = df.shape[0]
+        df_cleaned = df.dropna(subset=['WeatherDelay'])  
+        df_cleaned = df_cleaned[df_cleaned['WeatherDelay'] != 0] 
+        cleaned_row_count = df_cleaned.shape[0]
+        logging.debug(f"Cleaned data by removing NaN and 0 values in 'WeatherDelay'. Rows before: {initial_row_count}, after: {cleaned_row_count}")
+        return df_cleaned
+    except Exception as e:
+        logging.error("Error occurred while cleaning data", exc_info=True)
+        raise   
+
+    
 def event_type_bar_chart(df): 
     '''
     Bar Cahrt for 'EventType' counts.
     '''
     try: 
+        df_cleaned = clean_data(df)
         plt.figure(figsize=(12, 8))
-        sns.countplot(data=df,
+        sns.countplot(data=df_cleaned,
                       x='EventType',
                       palette='viridis')
         plt.title('Count of All Weather Event Types')
-        plt.xticks(rotation=45)
-        plt.tight_layout
+        plt.xticks(rotation=90, ha='center', fontsize=10)
+        plt.xlabel('Event Type', fontsize=12)
+        plt.ylabel('Count', fontsize=12)
+        plt.tight_layout()
+        plt.subplots_adjust(bottom=0.2)
         plt.savefig(visualization_directory / 'eda_event_type_counts.png')
+        plt.show()
         logging.info("Bar chart for 'EventType' saved successfully")
     except Exception as e: 
         logging.error("Error generating the bar chart.")
@@ -50,13 +78,14 @@ def weather_delay_boxplot(df):
     
     '''
     try: 
+        df_cleaned = clean_data(df)
         plt.figure(figsize=(12, 8))
-        sns.boxplot(data=df, x='EventType', y='WeatherDelay', palette='viridis')
+        sns.boxplot(data=df_cleaned, x='EventType', y='WeatherDelay', palette='viridis')
         plt.title('Box Plot of Weather Delay by Event Type')
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=45, ha='right')
         plt.tight_layout()
         plt.savefig(visualization_directory / 'eda_weather_delay_boxplot.png')
-        plt.close()
+        plt.show()
         logging.info("Box plot for 'WeatherDelay' by 'EventType' saved successfully.")
     except Exception as e:
         logging.error("Error generating box plot")
