@@ -205,12 +205,12 @@ def plot_regression_scatter(X_test, y_test, y_pred):
     try:
         plt.figure(figsize=(10, 6))
         sns.scatterplot(x=y_test, y=y_pred, color='blue', edgecolor='w', s=60)
-        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)  # Diagonal line for perfect prediction
+        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)  
         plt.xlabel('Actual Weather Delay')
         plt.ylabel('Predicted Weather Delay')
         plt.title('Scatter Plot of Actual vs. Predicted Weather Delay')
         plt.grid(True)
-        plt.savefig(visualization_directory / 'regression_scatterplot.png')  # Save the plot as a PNG file
+        plt.savefig(visualization_directory / 'regression_scatterplot.png') 
         plt.show()
         logging.info("Regression scatter plot saved as 'regression_scatterplot.png'")
     except Exception as e:
@@ -259,7 +259,7 @@ def regression_analysis_impact(df):
         plt.title('Impact of Different Weather Events on Weather Delay (Regression Coefficients)')
         plt.grid(True)
         plt.tight_layout()
-        plt.savefig(visualization_directory / 'regression_impact_analysis.png')  # Save the plot as a PNG file
+        plt.savefig(visualization_directory / 'regression_impact_analysis.png')  
         plt.show()
         logging.info("Regression impact analysis plot saved as 'regression_impact_analysis.png'")
     except Exception as e:

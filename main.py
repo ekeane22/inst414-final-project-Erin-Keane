@@ -44,7 +44,7 @@ def main():
 
         logger.info("ETL process completed. Starting analysis...")
 
-        df_wf = pd.read_csv(loaded_directory / 'wf.csv')
+        df_wf = pd.read_csv(loaded_directory / 'wf.csv', low_memory=False)
         df_wf = preprocessing1(df_wf)
         df_wf_encoded = preprocessing2(df_wf)
 

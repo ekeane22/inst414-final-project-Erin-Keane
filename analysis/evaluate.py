@@ -135,7 +135,6 @@ def split_regression(one_hot_encoded_df):
         X = one_hot_encoded_df.drop(['WeatherDelay'], axis=1) 
         y = one_hot_encoded_df['WeatherDelay']
         
-        # Ensure no NaN values in the target variable
         if y.isnull().any():
             y = y.fillna(0)
             logging.debug("Replaced NaN values in target variable 'WeatherDelay' with 0")
@@ -205,12 +204,12 @@ def plot_regression_scatter(X_test, y_test, y_pred):
     try:
         plt.figure(figsize=(14, 8))
         sns.scatterplot(x=y_test, y=y_pred, color='blue', edgecolor='w', s=60)
-        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)  # Diagonal line for perfect prediction
+        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)  
         plt.xlabel('Actual Weather Delay')
         plt.ylabel('Predicted Weather Delay')
         plt.title('Scatter Plot of Actual vs. Predicted Weather Delay')
         plt.grid(True)
-        plt.savefig(visualization_directory / 'regression_scatterplot.png')  # Save the plot as a PNG file
+        plt.savefig(visualization_directory / 'regression_scatterplot.png')  
         plt.show()
         logging.info("Regression scatter plot saved as 'regression_scatterplot.png'")
     except Exception as e:
@@ -235,7 +234,7 @@ def analyze_event_impact(df):
         plt.ylabel('Weather Delay (minutes)')
         plt.title('Impact of Different Weather Events on Weather Delay')
         plt.grid(True)
-        plt.savefig(visualization_directory / 'event_impact_analysis.png')  # Save the plot as a PNG file
+        plt.savefig(visualization_directory / 'event_impact_analysis.png')  
         plt.show()
         logging.info("Event impact analysis plot saved as 'event_impact_analysis.png'")
     except Exception as e:
@@ -263,7 +262,7 @@ def main():
         # Apply preprocessing2 with one-hot encoding
         df_wf_encoded = preprocessing2(df_wf)
         print("Completed preprocessing2")
-        print(df_wf_encoded.head())  # Check the dataframe after preprocessing2
+        print(df_wf_encoded.head())  
         
         output_file_path_encoded = outputs_directory / 'wf_preprocessed_encoded.csv'
         df_wf_encoded.to_csv(output_file_path_encoded, index=False)
