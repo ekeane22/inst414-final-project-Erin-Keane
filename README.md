@@ -31,7 +31,6 @@ INST414 Final Project - Airport Project
 
 ### analysis/
 #### evaluate.py 
-#### model.py 
 
 ### vis/ 
 #### visualizations.py

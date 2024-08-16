@@ -1,15 +1,6 @@
-
-# im not sure what im supposed to put here 
-#load needs to have info bc it goes from one database into another data system
-# data engineers are running security checks and logs and quality assurance checks 
-# makes sure data is working right and it has integrity and it loads correctly 
-
-
 '''
 technically, in this function, going to pull from transformed directory to here 
 then, move it to the loaded folder in the data directory
-
-
 '''
 
 import pandas as pd 
