@@ -343,6 +343,12 @@ def main():
     '''
     try: 
         
+        # Create outputs and visualization directories if they don't exist
+        outputs_directory.mkdir(parents=True, exist_ok=True)
+        visualization_directory.mkdir(parents=True, exist_ok=True)
+        
+        logging.info(f"Created directories: {outputs_directory} and {visualization_directory}") 
+        
         df_wf = read_csv()
         print("Data read successfully")
         print(df_wf.head())

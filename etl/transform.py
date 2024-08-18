@@ -16,6 +16,10 @@ logger = logging.getLogger(__name__)
 extracted_directory = Path('data/extracted')
 transformed_directory = Path('data/transformed')
 
+# Ensure the transformed directory exists and log its creation
+transformed_directory.mkdir(parents=True, exist_ok=True)
+logger.info(f"Created directory: {transformed_directory}")
+
 def load_from_extracted(extracted_directory): 
     '''
     Loads the two csv dataframes from the extract folder from the data directory. 

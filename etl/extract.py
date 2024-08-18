@@ -117,6 +117,11 @@ def process_data():
         Exception if an error occurs during data processing.
     '''
     try: 
+        
+        # Ensure the extracted directory exists
+        extracted_directory.mkdir(parents=True, exist_ok=True)
+        logger.info(f"Created directory: {extracted_directory}")  
+        
         flight_data = load_flight_data()
         storm_data = load_storm_data()
         save(flight_data, storm_data)

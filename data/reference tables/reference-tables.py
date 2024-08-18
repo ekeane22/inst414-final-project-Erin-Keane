@@ -18,10 +18,5 @@ weather = "Data Dictionary_US Weather Events (2016 - 2022).csv"
 data2 = pd.read_csv(weather, encoding='utf-8')
 print(data2.head())
 
-
-
-#Predicting Flight Delays 	
-#Attribute	Reference 
-#Cancelled Flight 	1 = Yes 
  
 

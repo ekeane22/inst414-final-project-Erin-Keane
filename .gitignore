@@ -1,6 +1,15 @@
+.DS_Store
 
-.DS_store
-Flight1.csv 
+county22.csv
+flight22.csv
+model_performance.csv
+wf.csv
+
+
+Data Dictionary_Predicting Flight Delays 2022.csv
+Data Dictionary_Weather Events Data.csv
+
+Flight1.csv
 Flight2.csv
 Flight3.csv
 Flight4.csv
@@ -13,31 +22,16 @@ Flight10.csv
 Flight11.csv
 Flight12.csv
 
-
-Data Dictionary_Predicting Flight Delays 2022.csv
-
-storm_data_lake.csv 
-storm_data_kendall.csv
-storm_data_grundy.csv
-storm_data_will.csv
-storm_data_kankakee.csv
 storm_data_cook.csv
-storm_data_mchenry.csv
-storm_data_kane.csv
-storm_data_dupage.csv
 storm_data_dekalb.csv
+storm_data_dupage.csv
+storm_data_grundy.csv
+storm_data_kane.csv
+storm_data_kankakee.csv
+storm_data_kendall.csv
+storm_data_lake.csv
+storm_data_mchenry.csv
+storm_data_will.csv
 
-county22.csv 
-flight22.csv
-
-Data Dictionary_Weather Events Data.csv
-
-Data Dictionary_Weather Events Data.csv 
-Data Dictonary_Weather Events Data.csv
-
-wf.csv 
-wf.csv
-
-wf_preprocessed_encoded.csv
 wf_preprocessed.csv
-model_performance.csv
+wf_preprocessed_encoded.csv
