@@ -14,7 +14,8 @@ INST414 Final Project - Airport Project
 #### 5. Unzip the data 
 #### 6. Place the Google Drive folder called 'final-project-data-EK' into the VS Code directory called 'data/'
 #### 7. Now, you should have a data directory called 'data/final_project_data_EK
-#### 8. pip install -r requirements.txt 
+#### 8. In your terminal, enter 'cd inst414-final-project-Erin-Keane'
+#### 9. pip install -r requirements.txt 
 
 # Running The Project 
 #### To run the main.py, enter "python3 main.py" in the terminal.
