@@ -9,8 +9,12 @@ INST414 Final Project - Airport Project
 ### To set up Venv in VS code, enter these commands in the terminal: 
 #### 1. python -m venv .venv 
 #### 2. source .venv/bin/activate
-#### 3. Clone the repository 
-#### 4. pip install -r requirements.txt
+#### 3. Clone the repository (using "git clone repository URL")
+#### 4. Download the data from the Google Drive folder called 'final-project-data-EK'. 
+#### 5. Unzip the data 
+#### 6. Place the Google Drive folder called 'final-project-data-EK' into the VS Code directory called 'data/'
+#### 7. Now, you should have a data directory called 'data/final_project_data_EK
+#### 8. pip install -r requirements.txt 
 
 # Running The Project 
 #### To run the main.py, enter "python3 main.py" in the terminal.
@@ -18,7 +22,7 @@ INST414 Final Project - Airport Project
 # Code Package Structure 
 ### inst414-final-project-Erin-Keane
 
-### data/
+### data/final-project-data-EK
 #### original_data/
 #### extracted/
 ##### transformed/
