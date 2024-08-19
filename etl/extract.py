@@ -30,7 +30,7 @@ import logging
 
 logger = logging.getLogger(__name__)
    
-data_directory = Path('data/final_project_data_EK/original data')
+data_directory = Path('data/final_project_data_EK/original_data')
 extracted_directory = Path('data/final_project_data_EK/extracted')
 
 def load_flight_data(): 
