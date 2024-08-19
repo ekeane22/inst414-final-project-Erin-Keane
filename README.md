@@ -6,6 +6,8 @@ INST414 Final Project - Airport Project
 
 
 # Set Up Instructions
+#### The link for the Data located in the Google Drive: https://drive.google.com/drive/folders/1Uxc7B8nxQeL2OsyVz_CJU0bF-OcaJY_c?usp=sharing
+
 #### 1. Enter this in the terminal: 'python3 -m venv .venv' 
 #### 2. Entier this in the terminal: 'source .venv/bin/activate'
 #### 3. Clone the repository (using "git clone {repository URL}")
@@ -17,7 +19,7 @@ INST414 Final Project - Airport Project
 #### 9. Enter this in the ternminal: 'pip install -r requirements.txt'
 
 # Running The Project 
-#### To run the main.py, enter "python3 main.py" in the terminal.
+#### 10. To run the main.py, enter "python3 main.py" in the terminal.
 #### Note: When main.py is finished running, 5 different visualizations will pop up on your screen. This process may take a minute or two. 
 
 # Code Package Structure 
