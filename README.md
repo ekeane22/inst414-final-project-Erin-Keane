@@ -18,6 +18,7 @@ INST414 Final Project - Airport Project
 
 # Running The Project 
 #### To run the main.py, enter "python3 main.py" in the terminal.
+#### Note: When main.py is finished running, 5 different visualizations will pop up on your screen. This process may take a minute or two. 
 
 # Code Package Structure 
 ### inst414-final-project-Erin-Keane
