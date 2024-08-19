@@ -12,9 +12,9 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 
 logger = logging.getLogger(__name__)
 
-loaded_directory = Path('data/final_project_data_EK/loaded')
-outputs_directory = Path('data/final_project_data_EK/outputs')
-visualization_directory = Path('data/final_project_data_EK/visualizations')
+loaded_directory = Path('data_ek/data/loaded')
+outputs_directory = Path('data_ek/dataoutputs')
+visualization_directory = Path('data_ek/data/visualizations')
 
 def read_csv(file_name='wf.csv'):
     '''

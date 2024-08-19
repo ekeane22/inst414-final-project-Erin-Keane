@@ -8,8 +8,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-outputs_directory = Path('data/final_project_data_EK/outputs')
-visualization_directory = Path('data/final_project_data_EK/visualizations')
+outputs_directory = Path('data_ek/data/outputs')
+visualization_directory = Path('data_ek/data/visualizations')
 
 
 def read_data_for_eda(file_name='wf_preprocessed.csv'):

@@ -13,8 +13,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-extracted_directory = Path('data/final_project_data_EK/extracted')
-transformed_directory = Path('data/final_project_data_EK/transformed')
+extracted_directory = Path('data_ek/data/extracted')
+transformed_directory = Path('data_ek/data/transformed')
 
 # Ensure the transformed directory exists and log its creation
 transformed_directory.mkdir(parents=True, exist_ok=True)

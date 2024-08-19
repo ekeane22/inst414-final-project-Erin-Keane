@@ -8,11 +8,11 @@ INST414 Final Project - Airport Project
 # Set Up Instructions
 #### 1. Enter this in the terminal: 'python3 -m venv .venv' 
 #### 2. Entier this in the terminal: 'source .venv/bin/activate'
-#### 3. Clone the repository (using "git clone repository URL")
-#### 4. Download the data from the Google Drive folder called 'final-project-data-EK'. 
+#### 3. Clone the repository (using "git clone {repository URL}")
+#### 4. Download the data from the Google Drive folder called 'data_ek'. 
 #### 5. Unzip the data 
-#### 6. Place the Google Drive folder called 'final-project-data-EK' into the VS Code directory called 'data/'
-#### 7. Now, you should have a data directory called 'data/final_project_data_EK
+#### 6. Place the Google Drive folder called 'data_ek' into the project folder called 'inst414-final-project-Erin-Keane'.
+#### 7. Now, you should have a data directory called 'data_ek/data'
 #### 8. Enter this in the terminal: 'cd inst414-final-project-Erin-Keane'
 #### 9. Enter this in the ternminal: 'pip install -r requirements.txt'
 
@@ -22,7 +22,7 @@ INST414 Final Project - Airport Project
 # Code Package Structure 
 ### inst414-final-project-Erin-Keane
 
-### data/final-project-data-EK
+### data_ek/data (From the Google Drive)
 #### original_data/
 #### extracted/
 ##### transformed/

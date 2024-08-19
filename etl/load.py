@@ -9,8 +9,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-transformed_directory = Path('data/final_project_data_EK/transformed')
-loaded_directory = Path('data/final_project_data_EK/loaded')
+transformed_directory = Path('data_ek/data/transformed')
+loaded_directory = Path('data_ek/data/loaded')
     
 
 def copy_wf(transformed_directory, loaded_directory): 
