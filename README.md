@@ -18,13 +18,13 @@ INST414 Final Project - Airport Project
 ### inst414-final-project-Erin-Keane
 
 ### data/
-#### original data/
+#### original_data/
 #### extracted/
 ##### transformed/
 ##### loaded/
 ##### outputs/ 
 ##### visualizations/
-##### reference tables/
+##### reference_tables/
 
 ### etl/
 #### extract.py
