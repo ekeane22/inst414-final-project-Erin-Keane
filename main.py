@@ -28,12 +28,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 #Define data directories 
-data_directory = Path('data/original data')
-extracted_directory = Path('data/extracted')
-transformed_directory = Path('data/transformed')
-loaded_directory = Path('data/loaded')
-outputs_directory = Path('data/outputs')
-visualizations_directory = Path('data/visualizations')
+data_directory = Path('data/final_project_data_EK/original_data')
+extracted_directory = Path('data/final_project_data_EK/extracted')
+transformed_directory = Path('data/final_project_data_EK/transformed')
+loaded_directory = Path('data/final_project_data_EK/loaded')
+outputs_directory = Path('data/final_project_data_EK/outputs')
+visualizations_directory = Path('data/final_project_data_EK/visualizations')
 
 def main():
     '''
